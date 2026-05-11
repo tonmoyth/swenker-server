@@ -1,0 +1,17 @@
+model VideoReport {
+  id            String @id @default(uuid())
+
+  userId        String
+  videoId       String
+
+  reason        ReportReason
+
+  user          User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  video         Video @relation(fields: [videoId], references: [id], onDelete: Cascade)
+
+  createdAt     DateTime @default(now())
+
+  @@index([userId])
+  @@index([videoId])
+}

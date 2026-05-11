@@ -1,0 +1,35 @@
+model Story {
+  id            String   @id @default(uuid())
+
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  mediaUrl      String
+
+  caption       String?
+
+  expiresAt     DateTime
+
+  createdAt     DateTime @default(now())
+
+  // Relations
+  tags          StoryTag[]
+
+  @@index([userId])
+}
+
+model StoryTag {
+  id              String   @id @default(uuid())
+
+  storyId         String
+  taggedUserId    String
+
+  story           Story @relation(fields: [storyId], references: [id], onDelete: Cascade)
+
+  taggedUser      User @relation(fields: [taggedUserId], references: [id], onDelete: Cascade)
+
+  createdAt       DateTime @default(now())
+
+  @@index([storyId])
+  @@index([taggedUserId])
+}

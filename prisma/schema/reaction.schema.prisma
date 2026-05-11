@@ -1,0 +1,17 @@
+model VideoReaction {
+  id            String @id @default(uuid())
+
+  userId        String
+  videoId       String
+
+  user          User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  video         Video @relation(fields: [videoId], references: [id], onDelete: Cascade)
+
+  createdAt     DateTime @default(now())
+
+  @@unique([userId, videoId])
+
+  @@index([userId])
+  @@index([videoId])
+}

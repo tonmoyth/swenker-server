@@ -1,0 +1,20 @@
+model Video {
+  id            String   @id @default(uuid())
+
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  videoUrl      String
+
+  caption       String?
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  reactions     VideoReaction[]
+  reports       VideoReport[]
+
+  @@index([userId])
+  @@index([createdAt])
+}

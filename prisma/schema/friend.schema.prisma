@@ -1,0 +1,19 @@
+model Friend {
+  id            String       @id @default(uuid())
+
+  senderId      String
+  receiverId    String
+
+  sender        User @relation("FriendSender", fields: [senderId], references: [id], onDelete: Cascade)
+
+  receiver      User @relation("FriendReceiver", fields: [receiverId], references: [id], onDelete: Cascade)
+
+  status        FriendStatus @default(PENDING)
+
+  createdAt     DateTime @default(now())
+
+  @@unique([senderId, receiverId])
+
+  @@index([senderId])
+  @@index([receiverId])
+}
