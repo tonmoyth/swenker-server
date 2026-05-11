@@ -3,6 +3,9 @@ import "multer"; // Ensures Express.Request is augmented with .file
 import { catchAsync } from "../../shared/catchAsync";
 import { userService } from "./user.service";
 import { uploadToCloudinary } from "../../middlewares/upload";
+import { tokenUtils } from "../../utils/token";
+import { cookieUtil } from "../../utils/cookie";
+import sendResponse from "../../utils/sendResponse";
 import httpStatus from "http-status";
 
 const registerUser = catchAsync(async (req: Request, res: Response) => {
@@ -17,13 +20,63 @@ const registerUser = catchAsync(async (req: Request, res: Response) => {
 
     const result = await userService.signUpEmail(userData);
 
-    res.status(httpStatus.CREATED).json({
+    sendResponse(res, {
+        statusCode: httpStatus.CREATED,
         success: true,
         message: "User registered successfully",
         data: result,
     });
 });
 
+const loginUser = catchAsync(async (req: Request, res: Response) => {
+    const result = await userService.loginUser(req.body);
+    const { user, token } = result;
+
+    const jwtPayload = {
+        id: user.id,
+        email: user.email,
+        role: user.role,
+        username: user.username,
+    };
+
+    const accessToken = tokenUtils.getToken(jwtPayload);
+    const refreshToken = tokenUtils.getRefreshToken(jwtPayload);
+
+    // Set tokens in cookies
+    tokenUtils.setTokenCookie(res, accessToken);
+    tokenUtils.setRefreshTokenCookie(res, refreshToken);
+    tokenUtils.setBetterAuthSession(res, token);
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "User logged in successfully",
+        data: user,
+        token: accessToken,
+        refreshToken,
+        sessionToken: token,
+    });
+});
+
+const logoutUser = catchAsync(async (req: Request, res: Response) => {
+    // Call service to invalidate Better Auth session
+    await userService.logoutUser(req.headers as unknown as Headers);
+
+    // Clear authentication cookies
+    cookieUtil.clearCookie(res, "accessToken", { path: "/" });
+    cookieUtil.clearCookie(res, "refreshToken", { path: "/" });
+    cookieUtil.clearCookie(res, "better-auth.session_token", { path: "/" });
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "User logged out successfully",
+        data: null,
+    });
+});
+
 export const userController = {
     registerUser,
+    loginUser,
+    logoutUser,
 };

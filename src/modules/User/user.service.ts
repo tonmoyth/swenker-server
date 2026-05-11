@@ -1,6 +1,6 @@
 import { auth } from "../../lib/auth";
 import { prisma } from "../../lib/prisma";
-import { IUserRegistration } from "./user.interface";
+import { IUserLogin, IUserRegistration } from "./user.interface";
 import AppError from "../../errors/AppError";
 import httpStatus from "http-status";
 
@@ -42,6 +42,27 @@ const signUpEmail = async (userData: IUserRegistration) => {
     return result;
 };
 
+const loginUser = async (payload: IUserLogin) => {
+    const userResponse = await auth.api.signInEmail({
+        body: {
+            email: payload.email,
+            password: payload.password,
+        },
+    });
+
+    if (!userResponse || !userResponse.user) {
+        throw new AppError(httpStatus.UNAUTHORIZED, "Invalid email or password");
+    }
+
+    return userResponse;
+};
+
+const logoutUser = async (headers: Headers) => {
+    await auth.api.signOut({ headers });
+};
+
 export const userService = {
     signUpEmail,
+    loginUser,
+    logoutUser,
 };

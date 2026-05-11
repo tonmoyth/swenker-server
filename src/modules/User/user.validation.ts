@@ -15,3 +15,12 @@ export const userRegisterSchema = z.object({
   }).min(6),
   bio: z.string().optional(),
 });
+
+export const userLoginSchema = z.object({
+  email: z.string({
+    message: 'Email is required',
+  }).email(),
+  password: z.string({
+    message: 'Password is required',
+  }).min(6),
+});

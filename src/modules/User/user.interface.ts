@@ -6,3 +6,8 @@ export type IUserRegistration = {
     bio?: string;
     profileImage?: string;
 };
+
+export type IUserLogin = {
+    email: string;
+    password: string;
+};

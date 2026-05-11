@@ -1,11 +1,12 @@
 import { v2 as cloudinary } from 'cloudinary';
 import multer from 'multer';
+import { envVeriables } from '../config/envConfig';
 
 // Cloudinary Configuration
 cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET,
+    cloud_name: envVeriables.CLOUDINARY_CLOUD_NAME,
+    api_key: envVeriables.CLOUDINARY_API_KEY,
+    api_secret: envVeriables.CLOUDINARY_API_SECRET,
 });
 
 // Multer Storage Configuration (Memory Storage)

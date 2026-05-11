@@ -2,7 +2,7 @@ import express from "express";
 import { userController } from "./user.controller";
 import { upload } from "../../middlewares/upload";
 import validateRequest from "../../middlewares/validateRequest";
-import { userRegisterSchema } from "./user.validation";
+import { userRegisterSchema, userLoginSchema } from "./user.validation";
 
 const router = express.Router();
 
@@ -17,6 +17,17 @@ router.post(
     },
     validateRequest(userRegisterSchema),
     userController.registerUser
+);
+
+router.post(
+    "/login",
+    validateRequest(userLoginSchema),
+    userController.loginUser
+);
+
+router.post(
+    "/logout",
+    userController.logoutUser
 );
 
 export const userRoutes = router;
