@@ -24,3 +24,21 @@ export const userLoginSchema = z.object({
     message: 'Password is required',
   }).min(6),
 });
+
+export const forgotPasswordSchema = z.object({
+  email: z.string({
+    message: 'Email is required',
+  }).email(),
+});
+
+export const resetPasswordSchema = z.object({
+  email: z.string({
+    message: 'Email is required',
+  }).email(),
+  otp: z.string({
+    message: 'OTP is required',
+  }),
+  newPassword: z.string({
+    message: 'New password is required',
+  }).min(6),
+});

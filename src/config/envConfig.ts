@@ -15,6 +15,9 @@ interface IEnvReturnType {
     JWT_EXPIRES_IN: string;
     JWT_REFRESH_SECRET_KEY: string;
     JWT_REFRESH_EXPIRES_IN: string;
+    EMAIL_USER: string;
+    EMAIL_PASS: string;
+    EMAIL_FROM: string;
 }
 
 const envConfig = (): IEnvReturnType => {
@@ -30,6 +33,9 @@ const envConfig = (): IEnvReturnType => {
         "JWT_EXPIRES_IN",
         "JWT_REFRESH_SECRET_KEY",
         "JWT_REFRESH_EXPIRES_IN",
+        "EMAIL_USER",
+        "EMAIL_PASS",
+        "EMAIL_FROM",
     ];
     envName.forEach((element) => {
         if (!process.env[element]) {
@@ -49,6 +55,9 @@ const envConfig = (): IEnvReturnType => {
         JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN!,
         JWT_REFRESH_SECRET_KEY: process.env.JWT_REFRESH_SECRET_KEY!,
         JWT_REFRESH_EXPIRES_IN: process.env.JWT_REFRESH_EXPIRES_IN!,
+        EMAIL_USER: process.env.EMAIL_USER!,
+        EMAIL_PASS: process.env.EMAIL_PASS!,
+        EMAIL_FROM: process.env.EMAIL_FROM!,
     };
 };
 

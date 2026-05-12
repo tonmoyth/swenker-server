@@ -61,8 +61,57 @@ const logoutUser = async (headers: Headers) => {
     await auth.api.signOut({ headers });
 };
 
+const forgotPassword = async (email: string) => {
+    const user = await prisma.user.findUnique({
+        where: { email },
+    });
+
+    if (!user) {
+        throw new AppError(httpStatus.NOT_FOUND, "User not found");
+    }
+
+    if (user.isActive === false) {
+        throw new AppError(httpStatus.FORBIDDEN, "Account is inactive");
+    }
+
+    const result = await auth.api.requestPasswordResetEmailOTP({
+        body: {
+            email,
+        },
+    });
+
+    return result;
+};
+
+const resetPassword = async (payload: any) => {
+    const { email, otp, newPassword } = payload;
+
+    await auth.api.resetPasswordEmailOTP({
+        body: {
+            email,
+            otp,
+            password: newPassword,
+        },
+    });
+
+    // Find user to delete sessions
+    const user = await prisma.user.findUnique({
+        where: { email },
+    });
+
+    if (user) {
+        await prisma.session.deleteMany({
+            where: {
+                userId: user.id,
+            },
+        });
+    }
+};
+
 export const userService = {
     signUpEmail,
     loginUser,
     logoutUser,
+    forgotPassword,
+    resetPassword,
 };

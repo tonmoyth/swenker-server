@@ -2,7 +2,7 @@ import express from "express";
 import { userController } from "./user.controller";
 import { upload } from "../../middlewares/upload";
 import validateRequest from "../../middlewares/validateRequest";
-import { userRegisterSchema, userLoginSchema } from "./user.validation";
+import { userRegisterSchema, userLoginSchema, forgotPasswordSchema, resetPasswordSchema } from "./user.validation";
 
 const router = express.Router();
 
@@ -28,6 +28,18 @@ router.post(
 router.post(
     "/logout",
     userController.logoutUser
+);
+
+router.post(
+    "/forgot-password",
+    validateRequest(forgotPasswordSchema),
+    userController.forgotPassword
+);
+
+router.post(
+    "/reset-password",
+    validateRequest(resetPasswordSchema),
+    userController.resetPassword
 );
 
 export const userRoutes = router;
