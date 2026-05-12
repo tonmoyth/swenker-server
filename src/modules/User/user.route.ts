@@ -2,7 +2,8 @@ import express from "express";
 import { userController } from "./user.controller";
 import { upload } from "../../middlewares/upload";
 import validateRequest from "../../middlewares/validateRequest";
-import { userRegisterSchema, userLoginSchema, forgotPasswordSchema, resetPasswordSchema } from "./user.validation";
+import { userRegisterSchema, userLoginSchema, forgotPasswordSchema, resetPasswordSchema, addFriendSchema } from "./user.validation";
+import { checkAuth } from "../../middlewares/checkAuth";
 
 const router = express.Router();
 
@@ -40,6 +41,19 @@ router.post(
     "/reset-password",
     validateRequest(resetPasswordSchema),
     userController.resetPassword
+);
+
+router.get(
+    "/recent-users",
+    checkAuth(),
+    userController.getRecentUsers
+);
+
+router.post(
+    "/add-friend",
+    checkAuth(),
+    validateRequest(addFriendSchema),
+    userController.addFriend
 );
 
 export const userRoutes = router;

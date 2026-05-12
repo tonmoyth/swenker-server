@@ -98,10 +98,37 @@ const resetPassword = catchAsync(async (req: Request, res: Response) => {
     });
 });
 
+const getRecentUsers = catchAsync(async (req: Request, res: Response) => {
+    const userId = req.user.id;
+    const result = await userService.getRecentUsers(userId);
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Recent users fetched successfully",
+        data: result,
+    });
+});
+
+const addFriend = catchAsync(async (req: Request, res: Response) => {
+    const senderId = req.user.id;
+    const { receiverId } = req.body;
+    const result = await userService.addFriend(senderId, receiverId);
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Friend request sent successfully",
+        data: result,
+    });
+});
+
 export const userController = {
     registerUser,
     loginUser,
     logoutUser,
     forgotPassword,
     resetPassword,
+    getRecentUsers,
+    addFriend,
 };

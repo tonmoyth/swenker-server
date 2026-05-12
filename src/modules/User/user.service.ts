@@ -108,10 +108,74 @@ const resetPassword = async (payload: any) => {
     }
 };
 
+const getRecentUsers = async (currentUserId: string) => {
+    const users = await prisma.user.findMany({
+        where: {
+            isActive: true,
+            NOT: {
+                id: currentUserId,
+            },
+        },
+        orderBy: {
+            createdAt: "desc",
+        },
+        take: 10,
+        select: {
+            id: true,
+            username: true,
+            fullName: true,
+            profileImage: true,
+            bio: true,
+            createdAt: true,
+        },
+    });
+
+    return users;
+};
+
+const addFriend = async (senderId: string, receiverId: string) => {
+    if (senderId === receiverId) {
+        throw new AppError(httpStatus.BAD_REQUEST, "You cannot send a friend request to yourself");
+    }
+
+    const receiver = await prisma.user.findUnique({
+        where: { id: receiverId, isActive: true },
+    });
+
+    if (!receiver) {
+        throw new AppError(httpStatus.NOT_FOUND, "Receiver not found or inactive");
+    }
+
+    const existingRequest = await prisma.friend.findFirst({
+        where: {
+            OR: [
+                { senderId, receiverId },
+                { senderId: receiverId, receiverId: senderId },
+            ],
+        },
+    });
+
+    if (existingRequest) {
+        throw new AppError(httpStatus.BAD_REQUEST, "Friend request already exists or you are already friends");
+    }
+
+    const result = await prisma.friend.create({
+        data: {
+            senderId,
+            receiverId,
+            status: "PENDING",
+        },
+    });
+
+    return result;
+};
+
 export const userService = {
     signUpEmail,
     loginUser,
     logoutUser,
     forgotPassword,
     resetPassword,
+    getRecentUsers,
+    addFriend,
 };

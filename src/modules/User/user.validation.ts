@@ -42,3 +42,9 @@ export const resetPasswordSchema = z.object({
     message: 'New password is required',
   }).min(6),
 });
+
+export const addFriendSchema = z.object({
+  receiverId: z.string({
+    message: 'Receiver ID is required',
+  }),
+});
