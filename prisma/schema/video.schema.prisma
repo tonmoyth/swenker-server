@@ -14,7 +14,23 @@ model Video {
   // Relations
   reactions     VideoReaction[]
   reports       VideoReport[]
+  tags          VideoTag[]
 
   @@index([userId])
   @@index([createdAt])
+}
+
+model VideoTag {
+  id        String   @id @default(uuid())
+  videoId   String
+  userId    String
+
+  video     Video    @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([videoId, userId])
+  @@index([videoId])
+  @@index([userId])
 }

@@ -395,7 +395,8 @@ export const ModelName = {
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification',
-  Video: 'Video'
+  Video: 'Video',
+  VideoTag: 'VideoTag'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -411,7 +412,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "friend" | "notification" | "videoReaction" | "videoReport" | "story" | "storyTag" | "subscription" | "user" | "session" | "account" | "verification" | "video"
+    modelProps: "friend" | "notification" | "videoReaction" | "videoReport" | "story" | "storyTag" | "subscription" | "user" | "session" | "account" | "verification" | "video" | "videoTag"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1303,6 +1304,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    VideoTag: {
+      payload: Prisma.$VideoTagPayload<ExtArgs>
+      fields: Prisma.VideoTagFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.VideoTagFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VideoTagPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.VideoTagFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VideoTagPayload>
+        }
+        findFirst: {
+          args: Prisma.VideoTagFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VideoTagPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.VideoTagFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VideoTagPayload>
+        }
+        findMany: {
+          args: Prisma.VideoTagFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VideoTagPayload>[]
+        }
+        create: {
+          args: Prisma.VideoTagCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VideoTagPayload>
+        }
+        createMany: {
+          args: Prisma.VideoTagCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.VideoTagCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VideoTagPayload>[]
+        }
+        delete: {
+          args: Prisma.VideoTagDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VideoTagPayload>
+        }
+        update: {
+          args: Prisma.VideoTagUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VideoTagPayload>
+        }
+        deleteMany: {
+          args: Prisma.VideoTagDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.VideoTagUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.VideoTagUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VideoTagPayload>[]
+        }
+        upsert: {
+          args: Prisma.VideoTagUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VideoTagPayload>
+        }
+        aggregate: {
+          args: Prisma.VideoTagAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateVideoTag>
+        }
+        groupBy: {
+          args: Prisma.VideoTagGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VideoTagGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.VideoTagCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VideoTagCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1495,6 +1570,16 @@ export const VideoScalarFieldEnum = {
 } as const
 
 export type VideoScalarFieldEnum = (typeof VideoScalarFieldEnum)[keyof typeof VideoScalarFieldEnum]
+
+
+export const VideoTagScalarFieldEnum = {
+  id: 'id',
+  videoId: 'videoId',
+  userId: 'userId',
+  createdAt: 'createdAt'
+} as const
+
+export type VideoTagScalarFieldEnum = (typeof VideoTagScalarFieldEnum)[keyof typeof VideoTagScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1753,6 +1838,7 @@ export type GlobalOmitConfig = {
   account?: Prisma.AccountOmit
   verification?: Prisma.VerificationOmit
   video?: Prisma.VideoOmit
+  videoTag?: Prisma.VideoTagOmit
 }
 
 /* Types for Logging */

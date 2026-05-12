@@ -27,6 +27,7 @@ model User {
     storyTags              StoryTag[]
     sentFriendRequests     Friend[]        @relation("FriendSender")
     receivedFriendRequests Friend[]        @relation("FriendReceiver")
+    videoTags              VideoTag[]
 
     @@map("user")
 }

@@ -48,3 +48,7 @@ export const addFriendSchema = z.object({
     message: 'Receiver ID is required',
   }),
 });
+
+export const getFriendsSchema = z.object({
+  searchTerm: z.string().optional(),
+});

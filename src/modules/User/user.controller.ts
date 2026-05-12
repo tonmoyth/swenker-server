@@ -123,6 +123,20 @@ const addFriend = catchAsync(async (req: Request, res: Response) => {
     });
 });
 
+const getFriends = catchAsync(async (req: Request, res: Response) => {
+    const userId = req.user.id;
+    const { searchTerm } = req.query;
+
+    const result = await userService.getFriends(userId, searchTerm as string);
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Friends fetched successfully",
+        data: result,
+    });
+});
+
 export const userController = {
     registerUser,
     loginUser,
@@ -131,4 +145,5 @@ export const userController = {
     resetPassword,
     getRecentUsers,
     addFriend,
+    getFriends,
 };

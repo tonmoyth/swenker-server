@@ -251,6 +251,7 @@ export type UserWhereInput = {
   storyTags?: Prisma.StoryTagListRelationFilter
   sentFriendRequests?: Prisma.FriendListRelationFilter
   receivedFriendRequests?: Prisma.FriendListRelationFilter
+  videoTags?: Prisma.VideoTagListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -279,6 +280,7 @@ export type UserOrderByWithRelationInput = {
   storyTags?: Prisma.StoryTagOrderByRelationAggregateInput
   sentFriendRequests?: Prisma.FriendOrderByRelationAggregateInput
   receivedFriendRequests?: Prisma.FriendOrderByRelationAggregateInput
+  videoTags?: Prisma.VideoTagOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -310,6 +312,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   storyTags?: Prisma.StoryTagListRelationFilter
   sentFriendRequests?: Prisma.FriendListRelationFilter
   receivedFriendRequests?: Prisma.FriendListRelationFilter
+  videoTags?: Prisma.VideoTagListRelationFilter
 }, "id" | "username" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -374,6 +377,7 @@ export type UserCreateInput = {
   storyTags?: Prisma.StoryTagCreateNestedManyWithoutTaggedUserInput
   sentFriendRequests?: Prisma.FriendCreateNestedManyWithoutSenderInput
   receivedFriendRequests?: Prisma.FriendCreateNestedManyWithoutReceiverInput
+  videoTags?: Prisma.VideoTagCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -402,6 +406,7 @@ export type UserUncheckedCreateInput = {
   storyTags?: Prisma.StoryTagUncheckedCreateNestedManyWithoutTaggedUserInput
   sentFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutSenderInput
   receivedFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutReceiverInput
+  videoTags?: Prisma.VideoTagUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -430,6 +435,7 @@ export type UserUpdateInput = {
   storyTags?: Prisma.StoryTagUpdateManyWithoutTaggedUserNestedInput
   sentFriendRequests?: Prisma.FriendUpdateManyWithoutSenderNestedInput
   receivedFriendRequests?: Prisma.FriendUpdateManyWithoutReceiverNestedInput
+  videoTags?: Prisma.VideoTagUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -458,6 +464,7 @@ export type UserUncheckedUpdateInput = {
   storyTags?: Prisma.StoryTagUncheckedUpdateManyWithoutTaggedUserNestedInput
   sentFriendRequests?: Prisma.FriendUncheckedUpdateManyWithoutSenderNestedInput
   receivedFriendRequests?: Prisma.FriendUncheckedUpdateManyWithoutReceiverNestedInput
+  videoTags?: Prisma.VideoTagUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -748,6 +755,20 @@ export type UserUpdateOneRequiredWithoutVideosNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutVideosInput, Prisma.UserUpdateWithoutVideosInput>, Prisma.UserUncheckedUpdateWithoutVideosInput>
 }
 
+export type UserCreateNestedOneWithoutVideoTagsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutVideoTagsInput, Prisma.UserUncheckedCreateWithoutVideoTagsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutVideoTagsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutVideoTagsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutVideoTagsInput, Prisma.UserUncheckedCreateWithoutVideoTagsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutVideoTagsInput
+  upsert?: Prisma.UserUpsertWithoutVideoTagsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutVideoTagsInput, Prisma.UserUpdateWithoutVideoTagsInput>, Prisma.UserUncheckedUpdateWithoutVideoTagsInput>
+}
+
 export type UserCreateWithoutSentFriendRequestsInput = {
   id?: string
   username: string
@@ -773,6 +794,7 @@ export type UserCreateWithoutSentFriendRequestsInput = {
   reports?: Prisma.VideoReportCreateNestedManyWithoutUserInput
   storyTags?: Prisma.StoryTagCreateNestedManyWithoutTaggedUserInput
   receivedFriendRequests?: Prisma.FriendCreateNestedManyWithoutReceiverInput
+  videoTags?: Prisma.VideoTagCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSentFriendRequestsInput = {
@@ -800,6 +822,7 @@ export type UserUncheckedCreateWithoutSentFriendRequestsInput = {
   reports?: Prisma.VideoReportUncheckedCreateNestedManyWithoutUserInput
   storyTags?: Prisma.StoryTagUncheckedCreateNestedManyWithoutTaggedUserInput
   receivedFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutReceiverInput
+  videoTags?: Prisma.VideoTagUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSentFriendRequestsInput = {
@@ -832,6 +855,7 @@ export type UserCreateWithoutReceivedFriendRequestsInput = {
   reports?: Prisma.VideoReportCreateNestedManyWithoutUserInput
   storyTags?: Prisma.StoryTagCreateNestedManyWithoutTaggedUserInput
   sentFriendRequests?: Prisma.FriendCreateNestedManyWithoutSenderInput
+  videoTags?: Prisma.VideoTagCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReceivedFriendRequestsInput = {
@@ -859,6 +883,7 @@ export type UserUncheckedCreateWithoutReceivedFriendRequestsInput = {
   reports?: Prisma.VideoReportUncheckedCreateNestedManyWithoutUserInput
   storyTags?: Prisma.StoryTagUncheckedCreateNestedManyWithoutTaggedUserInput
   sentFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutSenderInput
+  videoTags?: Prisma.VideoTagUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReceivedFriendRequestsInput = {
@@ -902,6 +927,7 @@ export type UserUpdateWithoutSentFriendRequestsInput = {
   reports?: Prisma.VideoReportUpdateManyWithoutUserNestedInput
   storyTags?: Prisma.StoryTagUpdateManyWithoutTaggedUserNestedInput
   receivedFriendRequests?: Prisma.FriendUpdateManyWithoutReceiverNestedInput
+  videoTags?: Prisma.VideoTagUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSentFriendRequestsInput = {
@@ -929,6 +955,7 @@ export type UserUncheckedUpdateWithoutSentFriendRequestsInput = {
   reports?: Prisma.VideoReportUncheckedUpdateManyWithoutUserNestedInput
   storyTags?: Prisma.StoryTagUncheckedUpdateManyWithoutTaggedUserNestedInput
   receivedFriendRequests?: Prisma.FriendUncheckedUpdateManyWithoutReceiverNestedInput
+  videoTags?: Prisma.VideoTagUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutReceivedFriendRequestsInput = {
@@ -967,6 +994,7 @@ export type UserUpdateWithoutReceivedFriendRequestsInput = {
   reports?: Prisma.VideoReportUpdateManyWithoutUserNestedInput
   storyTags?: Prisma.StoryTagUpdateManyWithoutTaggedUserNestedInput
   sentFriendRequests?: Prisma.FriendUpdateManyWithoutSenderNestedInput
+  videoTags?: Prisma.VideoTagUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReceivedFriendRequestsInput = {
@@ -994,6 +1022,7 @@ export type UserUncheckedUpdateWithoutReceivedFriendRequestsInput = {
   reports?: Prisma.VideoReportUncheckedUpdateManyWithoutUserNestedInput
   storyTags?: Prisma.StoryTagUncheckedUpdateManyWithoutTaggedUserNestedInput
   sentFriendRequests?: Prisma.FriendUncheckedUpdateManyWithoutSenderNestedInput
+  videoTags?: Prisma.VideoTagUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSentNotificationsInput = {
@@ -1021,6 +1050,7 @@ export type UserCreateWithoutSentNotificationsInput = {
   storyTags?: Prisma.StoryTagCreateNestedManyWithoutTaggedUserInput
   sentFriendRequests?: Prisma.FriendCreateNestedManyWithoutSenderInput
   receivedFriendRequests?: Prisma.FriendCreateNestedManyWithoutReceiverInput
+  videoTags?: Prisma.VideoTagCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSentNotificationsInput = {
@@ -1048,6 +1078,7 @@ export type UserUncheckedCreateWithoutSentNotificationsInput = {
   storyTags?: Prisma.StoryTagUncheckedCreateNestedManyWithoutTaggedUserInput
   sentFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutSenderInput
   receivedFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutReceiverInput
+  videoTags?: Prisma.VideoTagUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSentNotificationsInput = {
@@ -1080,6 +1111,7 @@ export type UserCreateWithoutReceivedNotificationsInput = {
   storyTags?: Prisma.StoryTagCreateNestedManyWithoutTaggedUserInput
   sentFriendRequests?: Prisma.FriendCreateNestedManyWithoutSenderInput
   receivedFriendRequests?: Prisma.FriendCreateNestedManyWithoutReceiverInput
+  videoTags?: Prisma.VideoTagCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReceivedNotificationsInput = {
@@ -1107,6 +1139,7 @@ export type UserUncheckedCreateWithoutReceivedNotificationsInput = {
   storyTags?: Prisma.StoryTagUncheckedCreateNestedManyWithoutTaggedUserInput
   sentFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutSenderInput
   receivedFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutReceiverInput
+  videoTags?: Prisma.VideoTagUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReceivedNotificationsInput = {
@@ -1150,6 +1183,7 @@ export type UserUpdateWithoutSentNotificationsInput = {
   storyTags?: Prisma.StoryTagUpdateManyWithoutTaggedUserNestedInput
   sentFriendRequests?: Prisma.FriendUpdateManyWithoutSenderNestedInput
   receivedFriendRequests?: Prisma.FriendUpdateManyWithoutReceiverNestedInput
+  videoTags?: Prisma.VideoTagUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSentNotificationsInput = {
@@ -1177,6 +1211,7 @@ export type UserUncheckedUpdateWithoutSentNotificationsInput = {
   storyTags?: Prisma.StoryTagUncheckedUpdateManyWithoutTaggedUserNestedInput
   sentFriendRequests?: Prisma.FriendUncheckedUpdateManyWithoutSenderNestedInput
   receivedFriendRequests?: Prisma.FriendUncheckedUpdateManyWithoutReceiverNestedInput
+  videoTags?: Prisma.VideoTagUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutReceivedNotificationsInput = {
@@ -1215,6 +1250,7 @@ export type UserUpdateWithoutReceivedNotificationsInput = {
   storyTags?: Prisma.StoryTagUpdateManyWithoutTaggedUserNestedInput
   sentFriendRequests?: Prisma.FriendUpdateManyWithoutSenderNestedInput
   receivedFriendRequests?: Prisma.FriendUpdateManyWithoutReceiverNestedInput
+  videoTags?: Prisma.VideoTagUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReceivedNotificationsInput = {
@@ -1242,6 +1278,7 @@ export type UserUncheckedUpdateWithoutReceivedNotificationsInput = {
   storyTags?: Prisma.StoryTagUncheckedUpdateManyWithoutTaggedUserNestedInput
   sentFriendRequests?: Prisma.FriendUncheckedUpdateManyWithoutSenderNestedInput
   receivedFriendRequests?: Prisma.FriendUncheckedUpdateManyWithoutReceiverNestedInput
+  videoTags?: Prisma.VideoTagUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutReactionsInput = {
@@ -1269,6 +1306,7 @@ export type UserCreateWithoutReactionsInput = {
   storyTags?: Prisma.StoryTagCreateNestedManyWithoutTaggedUserInput
   sentFriendRequests?: Prisma.FriendCreateNestedManyWithoutSenderInput
   receivedFriendRequests?: Prisma.FriendCreateNestedManyWithoutReceiverInput
+  videoTags?: Prisma.VideoTagCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReactionsInput = {
@@ -1296,6 +1334,7 @@ export type UserUncheckedCreateWithoutReactionsInput = {
   storyTags?: Prisma.StoryTagUncheckedCreateNestedManyWithoutTaggedUserInput
   sentFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutSenderInput
   receivedFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutReceiverInput
+  videoTags?: Prisma.VideoTagUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReactionsInput = {
@@ -1339,6 +1378,7 @@ export type UserUpdateWithoutReactionsInput = {
   storyTags?: Prisma.StoryTagUpdateManyWithoutTaggedUserNestedInput
   sentFriendRequests?: Prisma.FriendUpdateManyWithoutSenderNestedInput
   receivedFriendRequests?: Prisma.FriendUpdateManyWithoutReceiverNestedInput
+  videoTags?: Prisma.VideoTagUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReactionsInput = {
@@ -1366,6 +1406,7 @@ export type UserUncheckedUpdateWithoutReactionsInput = {
   storyTags?: Prisma.StoryTagUncheckedUpdateManyWithoutTaggedUserNestedInput
   sentFriendRequests?: Prisma.FriendUncheckedUpdateManyWithoutSenderNestedInput
   receivedFriendRequests?: Prisma.FriendUncheckedUpdateManyWithoutReceiverNestedInput
+  videoTags?: Prisma.VideoTagUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutReportsInput = {
@@ -1393,6 +1434,7 @@ export type UserCreateWithoutReportsInput = {
   storyTags?: Prisma.StoryTagCreateNestedManyWithoutTaggedUserInput
   sentFriendRequests?: Prisma.FriendCreateNestedManyWithoutSenderInput
   receivedFriendRequests?: Prisma.FriendCreateNestedManyWithoutReceiverInput
+  videoTags?: Prisma.VideoTagCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReportsInput = {
@@ -1420,6 +1462,7 @@ export type UserUncheckedCreateWithoutReportsInput = {
   storyTags?: Prisma.StoryTagUncheckedCreateNestedManyWithoutTaggedUserInput
   sentFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutSenderInput
   receivedFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutReceiverInput
+  videoTags?: Prisma.VideoTagUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReportsInput = {
@@ -1463,6 +1506,7 @@ export type UserUpdateWithoutReportsInput = {
   storyTags?: Prisma.StoryTagUpdateManyWithoutTaggedUserNestedInput
   sentFriendRequests?: Prisma.FriendUpdateManyWithoutSenderNestedInput
   receivedFriendRequests?: Prisma.FriendUpdateManyWithoutReceiverNestedInput
+  videoTags?: Prisma.VideoTagUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReportsInput = {
@@ -1490,6 +1534,7 @@ export type UserUncheckedUpdateWithoutReportsInput = {
   storyTags?: Prisma.StoryTagUncheckedUpdateManyWithoutTaggedUserNestedInput
   sentFriendRequests?: Prisma.FriendUncheckedUpdateManyWithoutSenderNestedInput
   receivedFriendRequests?: Prisma.FriendUncheckedUpdateManyWithoutReceiverNestedInput
+  videoTags?: Prisma.VideoTagUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutStoriesInput = {
@@ -1517,6 +1562,7 @@ export type UserCreateWithoutStoriesInput = {
   storyTags?: Prisma.StoryTagCreateNestedManyWithoutTaggedUserInput
   sentFriendRequests?: Prisma.FriendCreateNestedManyWithoutSenderInput
   receivedFriendRequests?: Prisma.FriendCreateNestedManyWithoutReceiverInput
+  videoTags?: Prisma.VideoTagCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutStoriesInput = {
@@ -1544,6 +1590,7 @@ export type UserUncheckedCreateWithoutStoriesInput = {
   storyTags?: Prisma.StoryTagUncheckedCreateNestedManyWithoutTaggedUserInput
   sentFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutSenderInput
   receivedFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutReceiverInput
+  videoTags?: Prisma.VideoTagUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutStoriesInput = {
@@ -1587,6 +1634,7 @@ export type UserUpdateWithoutStoriesInput = {
   storyTags?: Prisma.StoryTagUpdateManyWithoutTaggedUserNestedInput
   sentFriendRequests?: Prisma.FriendUpdateManyWithoutSenderNestedInput
   receivedFriendRequests?: Prisma.FriendUpdateManyWithoutReceiverNestedInput
+  videoTags?: Prisma.VideoTagUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStoriesInput = {
@@ -1614,6 +1662,7 @@ export type UserUncheckedUpdateWithoutStoriesInput = {
   storyTags?: Prisma.StoryTagUncheckedUpdateManyWithoutTaggedUserNestedInput
   sentFriendRequests?: Prisma.FriendUncheckedUpdateManyWithoutSenderNestedInput
   receivedFriendRequests?: Prisma.FriendUncheckedUpdateManyWithoutReceiverNestedInput
+  videoTags?: Prisma.VideoTagUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutStoryTagsInput = {
@@ -1641,6 +1690,7 @@ export type UserCreateWithoutStoryTagsInput = {
   reports?: Prisma.VideoReportCreateNestedManyWithoutUserInput
   sentFriendRequests?: Prisma.FriendCreateNestedManyWithoutSenderInput
   receivedFriendRequests?: Prisma.FriendCreateNestedManyWithoutReceiverInput
+  videoTags?: Prisma.VideoTagCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutStoryTagsInput = {
@@ -1668,6 +1718,7 @@ export type UserUncheckedCreateWithoutStoryTagsInput = {
   reports?: Prisma.VideoReportUncheckedCreateNestedManyWithoutUserInput
   sentFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutSenderInput
   receivedFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutReceiverInput
+  videoTags?: Prisma.VideoTagUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutStoryTagsInput = {
@@ -1711,6 +1762,7 @@ export type UserUpdateWithoutStoryTagsInput = {
   reports?: Prisma.VideoReportUpdateManyWithoutUserNestedInput
   sentFriendRequests?: Prisma.FriendUpdateManyWithoutSenderNestedInput
   receivedFriendRequests?: Prisma.FriendUpdateManyWithoutReceiverNestedInput
+  videoTags?: Prisma.VideoTagUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStoryTagsInput = {
@@ -1738,6 +1790,7 @@ export type UserUncheckedUpdateWithoutStoryTagsInput = {
   reports?: Prisma.VideoReportUncheckedUpdateManyWithoutUserNestedInput
   sentFriendRequests?: Prisma.FriendUncheckedUpdateManyWithoutSenderNestedInput
   receivedFriendRequests?: Prisma.FriendUncheckedUpdateManyWithoutReceiverNestedInput
+  videoTags?: Prisma.VideoTagUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSubscriptionsInput = {
@@ -1765,6 +1818,7 @@ export type UserCreateWithoutSubscriptionsInput = {
   storyTags?: Prisma.StoryTagCreateNestedManyWithoutTaggedUserInput
   sentFriendRequests?: Prisma.FriendCreateNestedManyWithoutSenderInput
   receivedFriendRequests?: Prisma.FriendCreateNestedManyWithoutReceiverInput
+  videoTags?: Prisma.VideoTagCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSubscriptionsInput = {
@@ -1792,6 +1846,7 @@ export type UserUncheckedCreateWithoutSubscriptionsInput = {
   storyTags?: Prisma.StoryTagUncheckedCreateNestedManyWithoutTaggedUserInput
   sentFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutSenderInput
   receivedFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutReceiverInput
+  videoTags?: Prisma.VideoTagUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSubscriptionsInput = {
@@ -1824,6 +1879,7 @@ export type UserCreateWithoutSubscribersInput = {
   storyTags?: Prisma.StoryTagCreateNestedManyWithoutTaggedUserInput
   sentFriendRequests?: Prisma.FriendCreateNestedManyWithoutSenderInput
   receivedFriendRequests?: Prisma.FriendCreateNestedManyWithoutReceiverInput
+  videoTags?: Prisma.VideoTagCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSubscribersInput = {
@@ -1851,6 +1907,7 @@ export type UserUncheckedCreateWithoutSubscribersInput = {
   storyTags?: Prisma.StoryTagUncheckedCreateNestedManyWithoutTaggedUserInput
   sentFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutSenderInput
   receivedFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutReceiverInput
+  videoTags?: Prisma.VideoTagUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSubscribersInput = {
@@ -1894,6 +1951,7 @@ export type UserUpdateWithoutSubscriptionsInput = {
   storyTags?: Prisma.StoryTagUpdateManyWithoutTaggedUserNestedInput
   sentFriendRequests?: Prisma.FriendUpdateManyWithoutSenderNestedInput
   receivedFriendRequests?: Prisma.FriendUpdateManyWithoutReceiverNestedInput
+  videoTags?: Prisma.VideoTagUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSubscriptionsInput = {
@@ -1921,6 +1979,7 @@ export type UserUncheckedUpdateWithoutSubscriptionsInput = {
   storyTags?: Prisma.StoryTagUncheckedUpdateManyWithoutTaggedUserNestedInput
   sentFriendRequests?: Prisma.FriendUncheckedUpdateManyWithoutSenderNestedInput
   receivedFriendRequests?: Prisma.FriendUncheckedUpdateManyWithoutReceiverNestedInput
+  videoTags?: Prisma.VideoTagUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutSubscribersInput = {
@@ -1959,6 +2018,7 @@ export type UserUpdateWithoutSubscribersInput = {
   storyTags?: Prisma.StoryTagUpdateManyWithoutTaggedUserNestedInput
   sentFriendRequests?: Prisma.FriendUpdateManyWithoutSenderNestedInput
   receivedFriendRequests?: Prisma.FriendUpdateManyWithoutReceiverNestedInput
+  videoTags?: Prisma.VideoTagUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSubscribersInput = {
@@ -1986,6 +2046,7 @@ export type UserUncheckedUpdateWithoutSubscribersInput = {
   storyTags?: Prisma.StoryTagUncheckedUpdateManyWithoutTaggedUserNestedInput
   sentFriendRequests?: Prisma.FriendUncheckedUpdateManyWithoutSenderNestedInput
   receivedFriendRequests?: Prisma.FriendUncheckedUpdateManyWithoutReceiverNestedInput
+  videoTags?: Prisma.VideoTagUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -2013,6 +2074,7 @@ export type UserCreateWithoutSessionsInput = {
   storyTags?: Prisma.StoryTagCreateNestedManyWithoutTaggedUserInput
   sentFriendRequests?: Prisma.FriendCreateNestedManyWithoutSenderInput
   receivedFriendRequests?: Prisma.FriendCreateNestedManyWithoutReceiverInput
+  videoTags?: Prisma.VideoTagCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -2040,6 +2102,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   storyTags?: Prisma.StoryTagUncheckedCreateNestedManyWithoutTaggedUserInput
   sentFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutSenderInput
   receivedFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutReceiverInput
+  videoTags?: Prisma.VideoTagUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -2083,6 +2146,7 @@ export type UserUpdateWithoutSessionsInput = {
   storyTags?: Prisma.StoryTagUpdateManyWithoutTaggedUserNestedInput
   sentFriendRequests?: Prisma.FriendUpdateManyWithoutSenderNestedInput
   receivedFriendRequests?: Prisma.FriendUpdateManyWithoutReceiverNestedInput
+  videoTags?: Prisma.VideoTagUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -2110,6 +2174,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   storyTags?: Prisma.StoryTagUncheckedUpdateManyWithoutTaggedUserNestedInput
   sentFriendRequests?: Prisma.FriendUncheckedUpdateManyWithoutSenderNestedInput
   receivedFriendRequests?: Prisma.FriendUncheckedUpdateManyWithoutReceiverNestedInput
+  videoTags?: Prisma.VideoTagUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -2137,6 +2202,7 @@ export type UserCreateWithoutAccountsInput = {
   storyTags?: Prisma.StoryTagCreateNestedManyWithoutTaggedUserInput
   sentFriendRequests?: Prisma.FriendCreateNestedManyWithoutSenderInput
   receivedFriendRequests?: Prisma.FriendCreateNestedManyWithoutReceiverInput
+  videoTags?: Prisma.VideoTagCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -2164,6 +2230,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   storyTags?: Prisma.StoryTagUncheckedCreateNestedManyWithoutTaggedUserInput
   sentFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutSenderInput
   receivedFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutReceiverInput
+  videoTags?: Prisma.VideoTagUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -2207,6 +2274,7 @@ export type UserUpdateWithoutAccountsInput = {
   storyTags?: Prisma.StoryTagUpdateManyWithoutTaggedUserNestedInput
   sentFriendRequests?: Prisma.FriendUpdateManyWithoutSenderNestedInput
   receivedFriendRequests?: Prisma.FriendUpdateManyWithoutReceiverNestedInput
+  videoTags?: Prisma.VideoTagUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -2234,6 +2302,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   storyTags?: Prisma.StoryTagUncheckedUpdateManyWithoutTaggedUserNestedInput
   sentFriendRequests?: Prisma.FriendUncheckedUpdateManyWithoutSenderNestedInput
   receivedFriendRequests?: Prisma.FriendUncheckedUpdateManyWithoutReceiverNestedInput
+  videoTags?: Prisma.VideoTagUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutVideosInput = {
@@ -2261,6 +2330,7 @@ export type UserCreateWithoutVideosInput = {
   storyTags?: Prisma.StoryTagCreateNestedManyWithoutTaggedUserInput
   sentFriendRequests?: Prisma.FriendCreateNestedManyWithoutSenderInput
   receivedFriendRequests?: Prisma.FriendCreateNestedManyWithoutReceiverInput
+  videoTags?: Prisma.VideoTagCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutVideosInput = {
@@ -2288,6 +2358,7 @@ export type UserUncheckedCreateWithoutVideosInput = {
   storyTags?: Prisma.StoryTagUncheckedCreateNestedManyWithoutTaggedUserInput
   sentFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutSenderInput
   receivedFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutReceiverInput
+  videoTags?: Prisma.VideoTagUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutVideosInput = {
@@ -2331,6 +2402,7 @@ export type UserUpdateWithoutVideosInput = {
   storyTags?: Prisma.StoryTagUpdateManyWithoutTaggedUserNestedInput
   sentFriendRequests?: Prisma.FriendUpdateManyWithoutSenderNestedInput
   receivedFriendRequests?: Prisma.FriendUpdateManyWithoutReceiverNestedInput
+  videoTags?: Prisma.VideoTagUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVideosInput = {
@@ -2348,6 +2420,135 @@ export type UserUncheckedUpdateWithoutVideosInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
+  sentNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  receivedNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscriberNestedInput
+  subscribers?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscribedToNestedInput
+  reactions?: Prisma.VideoReactionUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.VideoReportUncheckedUpdateManyWithoutUserNestedInput
+  storyTags?: Prisma.StoryTagUncheckedUpdateManyWithoutTaggedUserNestedInput
+  sentFriendRequests?: Prisma.FriendUncheckedUpdateManyWithoutSenderNestedInput
+  receivedFriendRequests?: Prisma.FriendUncheckedUpdateManyWithoutReceiverNestedInput
+  videoTags?: Prisma.VideoTagUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutVideoTagsInput = {
+  id?: string
+  username: string
+  fullName: string
+  email: string
+  emailVerified?: boolean
+  bio?: string | null
+  profileImage?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  isVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  videos?: Prisma.VideoCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryCreateNestedManyWithoutUserInput
+  sentNotifications?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  receivedNotifications?: Prisma.NotificationCreateNestedManyWithoutReceiverInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutSubscriberInput
+  subscribers?: Prisma.SubscriptionCreateNestedManyWithoutSubscribedToInput
+  reactions?: Prisma.VideoReactionCreateNestedManyWithoutUserInput
+  reports?: Prisma.VideoReportCreateNestedManyWithoutUserInput
+  storyTags?: Prisma.StoryTagCreateNestedManyWithoutTaggedUserInput
+  sentFriendRequests?: Prisma.FriendCreateNestedManyWithoutSenderInput
+  receivedFriendRequests?: Prisma.FriendCreateNestedManyWithoutReceiverInput
+}
+
+export type UserUncheckedCreateWithoutVideoTagsInput = {
+  id?: string
+  username: string
+  fullName: string
+  email: string
+  emailVerified?: boolean
+  bio?: string | null
+  profileImage?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  isVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  videos?: Prisma.VideoUncheckedCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
+  sentNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  receivedNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutReceiverInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscriberInput
+  subscribers?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscribedToInput
+  reactions?: Prisma.VideoReactionUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.VideoReportUncheckedCreateNestedManyWithoutUserInput
+  storyTags?: Prisma.StoryTagUncheckedCreateNestedManyWithoutTaggedUserInput
+  sentFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutSenderInput
+  receivedFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutReceiverInput
+}
+
+export type UserCreateOrConnectWithoutVideoTagsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutVideoTagsInput, Prisma.UserUncheckedCreateWithoutVideoTagsInput>
+}
+
+export type UserUpsertWithoutVideoTagsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutVideoTagsInput, Prisma.UserUncheckedUpdateWithoutVideoTagsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutVideoTagsInput, Prisma.UserUncheckedCreateWithoutVideoTagsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutVideoTagsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutVideoTagsInput, Prisma.UserUncheckedUpdateWithoutVideoTagsInput>
+}
+
+export type UserUpdateWithoutVideoTagsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  videos?: Prisma.VideoUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
+  sentNotifications?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  receivedNotifications?: Prisma.NotificationUpdateManyWithoutReceiverNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutSubscriberNestedInput
+  subscribers?: Prisma.SubscriptionUpdateManyWithoutSubscribedToNestedInput
+  reactions?: Prisma.VideoReactionUpdateManyWithoutUserNestedInput
+  reports?: Prisma.VideoReportUpdateManyWithoutUserNestedInput
+  storyTags?: Prisma.StoryTagUpdateManyWithoutTaggedUserNestedInput
+  sentFriendRequests?: Prisma.FriendUpdateManyWithoutSenderNestedInput
+  receivedFriendRequests?: Prisma.FriendUpdateManyWithoutReceiverNestedInput
+}
+
+export type UserUncheckedUpdateWithoutVideoTagsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  videos?: Prisma.VideoUncheckedUpdateManyWithoutUserNestedInput
   stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
   sentNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   receivedNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
@@ -2379,6 +2580,7 @@ export type UserCountOutputType = {
   storyTags: number
   sentFriendRequests: number
   receivedFriendRequests: number
+  videoTags: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2395,6 +2597,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   storyTags?: boolean | UserCountOutputTypeCountStoryTagsArgs
   sentFriendRequests?: boolean | UserCountOutputTypeCountSentFriendRequestsArgs
   receivedFriendRequests?: boolean | UserCountOutputTypeCountReceivedFriendRequestsArgs
+  videoTags?: boolean | UserCountOutputTypeCountVideoTagsArgs
 }
 
 /**
@@ -2498,6 +2701,13 @@ export type UserCountOutputTypeCountReceivedFriendRequestsArgs<ExtArgs extends r
   where?: Prisma.FriendWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountVideoTagsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.VideoTagWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2525,6 +2735,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   storyTags?: boolean | Prisma.User$storyTagsArgs<ExtArgs>
   sentFriendRequests?: boolean | Prisma.User$sentFriendRequestsArgs<ExtArgs>
   receivedFriendRequests?: boolean | Prisma.User$receivedFriendRequestsArgs<ExtArgs>
+  videoTags?: boolean | Prisma.User$videoTagsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -2588,6 +2799,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   storyTags?: boolean | Prisma.User$storyTagsArgs<ExtArgs>
   sentFriendRequests?: boolean | Prisma.User$sentFriendRequestsArgs<ExtArgs>
   receivedFriendRequests?: boolean | Prisma.User$receivedFriendRequestsArgs<ExtArgs>
+  videoTags?: boolean | Prisma.User$videoTagsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -2609,6 +2821,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     storyTags: Prisma.$StoryTagPayload<ExtArgs>[]
     sentFriendRequests: Prisma.$FriendPayload<ExtArgs>[]
     receivedFriendRequests: Prisma.$FriendPayload<ExtArgs>[]
+    videoTags: Prisma.$VideoTagPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3030,6 +3243,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   storyTags<T extends Prisma.User$storyTagsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$storyTagsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StoryTagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sentFriendRequests<T extends Prisma.User$sentFriendRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sentFriendRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FriendPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   receivedFriendRequests<T extends Prisma.User$receivedFriendRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$receivedFriendRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FriendPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  videoTags<T extends Prisma.User$videoTagsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$videoTagsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VideoTagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3773,6 +3987,30 @@ export type User$receivedFriendRequestsArgs<ExtArgs extends runtime.Types.Extens
   take?: number
   skip?: number
   distinct?: Prisma.FriendScalarFieldEnum | Prisma.FriendScalarFieldEnum[]
+}
+
+/**
+ * User.videoTags
+ */
+export type User$videoTagsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the VideoTag
+   */
+  select?: Prisma.VideoTagSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the VideoTag
+   */
+  omit?: Prisma.VideoTagOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VideoTagInclude<ExtArgs> | null
+  where?: Prisma.VideoTagWhereInput
+  orderBy?: Prisma.VideoTagOrderByWithRelationInput | Prisma.VideoTagOrderByWithRelationInput[]
+  cursor?: Prisma.VideoTagWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.VideoTagScalarFieldEnum | Prisma.VideoTagScalarFieldEnum[]
 }
 
 /**

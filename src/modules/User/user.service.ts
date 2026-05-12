@@ -170,6 +170,78 @@ const addFriend = async (senderId: string, receiverId: string) => {
     return result;
 };
 
+const getFriends = async (userId: string, searchTerm?: string) => {
+    const friends = await prisma.friend.findMany({
+        where: {
+            status: "ACCEPTED",
+            OR: [
+                {
+                    senderId: userId,
+                    receiver: {
+                        isActive: true,
+                        OR: searchTerm
+                            ? [
+                                  { username: { contains: searchTerm, mode: "insensitive" } },
+                                  { fullName: { contains: searchTerm, mode: "insensitive" } },
+                              ]
+                            : undefined,
+                    },
+                },
+                {
+                    receiverId: userId,
+                    sender: {
+                        isActive: true,
+                        OR: searchTerm
+                            ? [
+                                  { username: { contains: searchTerm, mode: "insensitive" } },
+                                  { fullName: { contains: searchTerm, mode: "insensitive" } },
+                              ]
+                            : undefined,
+                    },
+                },
+            ],
+        },
+        include: {
+            sender: {
+                select: {
+                    id: true,
+                    username: true,
+                    fullName: true,
+                    profileImage: true,
+                    bio: true,
+                    isVerified: true,
+                    createdAt: true,
+                },
+            },
+            receiver: {
+                select: {
+                    id: true,
+                    username: true,
+                    fullName: true,
+                    profileImage: true,
+                    bio: true,
+                    isVerified: true,
+                    createdAt: true,
+                },
+            },
+        },
+        orderBy: {
+            createdAt: "desc",
+        },
+    });
+
+    const result = friends.map((f) => {
+        const friend = f.senderId === userId ? f.receiver : f.sender;
+        return {
+            friendshipId: f.id,
+            friendshipCreatedAt: f.createdAt,
+            friend,
+        };
+    });
+
+    return result;
+};
+
 export const userService = {
     signUpEmail,
     loginUser,
@@ -178,4 +250,5 @@ export const userService = {
     resetPassword,
     getRecentUsers,
     addFriend,
+    getFriends,
 };

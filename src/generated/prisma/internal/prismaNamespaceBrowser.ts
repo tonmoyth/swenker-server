@@ -62,7 +62,8 @@ export const ModelName = {
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification',
-  Video: 'Video'
+  Video: 'Video',
+  VideoTag: 'VideoTag'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -234,6 +235,16 @@ export const VideoScalarFieldEnum = {
 } as const
 
 export type VideoScalarFieldEnum = (typeof VideoScalarFieldEnum)[keyof typeof VideoScalarFieldEnum]
+
+
+export const VideoTagScalarFieldEnum = {
+  id: 'id',
+  videoId: 'videoId',
+  userId: 'userId',
+  createdAt: 'createdAt'
+} as const
+
+export type VideoTagScalarFieldEnum = (typeof VideoTagScalarFieldEnum)[keyof typeof VideoTagScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -193,6 +193,7 @@ export type VideoWhereInput = {
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   reactions?: Prisma.VideoReactionListRelationFilter
   reports?: Prisma.VideoReportListRelationFilter
+  tags?: Prisma.VideoTagListRelationFilter
 }
 
 export type VideoOrderByWithRelationInput = {
@@ -205,6 +206,7 @@ export type VideoOrderByWithRelationInput = {
   user?: Prisma.UserOrderByWithRelationInput
   reactions?: Prisma.VideoReactionOrderByRelationAggregateInput
   reports?: Prisma.VideoReportOrderByRelationAggregateInput
+  tags?: Prisma.VideoTagOrderByRelationAggregateInput
 }
 
 export type VideoWhereUniqueInput = Prisma.AtLeast<{
@@ -220,6 +222,7 @@ export type VideoWhereUniqueInput = Prisma.AtLeast<{
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   reactions?: Prisma.VideoReactionListRelationFilter
   reports?: Prisma.VideoReportListRelationFilter
+  tags?: Prisma.VideoTagListRelationFilter
 }, "id">
 
 export type VideoOrderByWithAggregationInput = {
@@ -255,6 +258,7 @@ export type VideoCreateInput = {
   user: Prisma.UserCreateNestedOneWithoutVideosInput
   reactions?: Prisma.VideoReactionCreateNestedManyWithoutVideoInput
   reports?: Prisma.VideoReportCreateNestedManyWithoutVideoInput
+  tags?: Prisma.VideoTagCreateNestedManyWithoutVideoInput
 }
 
 export type VideoUncheckedCreateInput = {
@@ -266,6 +270,7 @@ export type VideoUncheckedCreateInput = {
   updatedAt?: Date | string
   reactions?: Prisma.VideoReactionUncheckedCreateNestedManyWithoutVideoInput
   reports?: Prisma.VideoReportUncheckedCreateNestedManyWithoutVideoInput
+  tags?: Prisma.VideoTagUncheckedCreateNestedManyWithoutVideoInput
 }
 
 export type VideoUpdateInput = {
@@ -277,6 +282,7 @@ export type VideoUpdateInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutVideosNestedInput
   reactions?: Prisma.VideoReactionUpdateManyWithoutVideoNestedInput
   reports?: Prisma.VideoReportUpdateManyWithoutVideoNestedInput
+  tags?: Prisma.VideoTagUpdateManyWithoutVideoNestedInput
 }
 
 export type VideoUncheckedUpdateInput = {
@@ -288,6 +294,7 @@ export type VideoUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reactions?: Prisma.VideoReactionUncheckedUpdateManyWithoutVideoNestedInput
   reports?: Prisma.VideoReportUncheckedUpdateManyWithoutVideoNestedInput
+  tags?: Prisma.VideoTagUncheckedUpdateManyWithoutVideoNestedInput
 }
 
 export type VideoCreateManyInput = {
@@ -428,6 +435,20 @@ export type VideoUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.VideoScalarWhereInput | Prisma.VideoScalarWhereInput[]
 }
 
+export type VideoCreateNestedOneWithoutTagsInput = {
+  create?: Prisma.XOR<Prisma.VideoCreateWithoutTagsInput, Prisma.VideoUncheckedCreateWithoutTagsInput>
+  connectOrCreate?: Prisma.VideoCreateOrConnectWithoutTagsInput
+  connect?: Prisma.VideoWhereUniqueInput
+}
+
+export type VideoUpdateOneRequiredWithoutTagsNestedInput = {
+  create?: Prisma.XOR<Prisma.VideoCreateWithoutTagsInput, Prisma.VideoUncheckedCreateWithoutTagsInput>
+  connectOrCreate?: Prisma.VideoCreateOrConnectWithoutTagsInput
+  upsert?: Prisma.VideoUpsertWithoutTagsInput
+  connect?: Prisma.VideoWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VideoUpdateToOneWithWhereWithoutTagsInput, Prisma.VideoUpdateWithoutTagsInput>, Prisma.VideoUncheckedUpdateWithoutTagsInput>
+}
+
 export type VideoCreateWithoutReactionsInput = {
   id?: string
   videoUrl: string
@@ -436,6 +457,7 @@ export type VideoCreateWithoutReactionsInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutVideosInput
   reports?: Prisma.VideoReportCreateNestedManyWithoutVideoInput
+  tags?: Prisma.VideoTagCreateNestedManyWithoutVideoInput
 }
 
 export type VideoUncheckedCreateWithoutReactionsInput = {
@@ -446,6 +468,7 @@ export type VideoUncheckedCreateWithoutReactionsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   reports?: Prisma.VideoReportUncheckedCreateNestedManyWithoutVideoInput
+  tags?: Prisma.VideoTagUncheckedCreateNestedManyWithoutVideoInput
 }
 
 export type VideoCreateOrConnectWithoutReactionsInput = {
@@ -472,6 +495,7 @@ export type VideoUpdateWithoutReactionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutVideosNestedInput
   reports?: Prisma.VideoReportUpdateManyWithoutVideoNestedInput
+  tags?: Prisma.VideoTagUpdateManyWithoutVideoNestedInput
 }
 
 export type VideoUncheckedUpdateWithoutReactionsInput = {
@@ -482,6 +506,7 @@ export type VideoUncheckedUpdateWithoutReactionsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reports?: Prisma.VideoReportUncheckedUpdateManyWithoutVideoNestedInput
+  tags?: Prisma.VideoTagUncheckedUpdateManyWithoutVideoNestedInput
 }
 
 export type VideoCreateWithoutReportsInput = {
@@ -492,6 +517,7 @@ export type VideoCreateWithoutReportsInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutVideosInput
   reactions?: Prisma.VideoReactionCreateNestedManyWithoutVideoInput
+  tags?: Prisma.VideoTagCreateNestedManyWithoutVideoInput
 }
 
 export type VideoUncheckedCreateWithoutReportsInput = {
@@ -502,6 +528,7 @@ export type VideoUncheckedCreateWithoutReportsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   reactions?: Prisma.VideoReactionUncheckedCreateNestedManyWithoutVideoInput
+  tags?: Prisma.VideoTagUncheckedCreateNestedManyWithoutVideoInput
 }
 
 export type VideoCreateOrConnectWithoutReportsInput = {
@@ -528,6 +555,7 @@ export type VideoUpdateWithoutReportsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutVideosNestedInput
   reactions?: Prisma.VideoReactionUpdateManyWithoutVideoNestedInput
+  tags?: Prisma.VideoTagUpdateManyWithoutVideoNestedInput
 }
 
 export type VideoUncheckedUpdateWithoutReportsInput = {
@@ -538,6 +566,7 @@ export type VideoUncheckedUpdateWithoutReportsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reactions?: Prisma.VideoReactionUncheckedUpdateManyWithoutVideoNestedInput
+  tags?: Prisma.VideoTagUncheckedUpdateManyWithoutVideoNestedInput
 }
 
 export type VideoCreateWithoutUserInput = {
@@ -548,6 +577,7 @@ export type VideoCreateWithoutUserInput = {
   updatedAt?: Date | string
   reactions?: Prisma.VideoReactionCreateNestedManyWithoutVideoInput
   reports?: Prisma.VideoReportCreateNestedManyWithoutVideoInput
+  tags?: Prisma.VideoTagCreateNestedManyWithoutVideoInput
 }
 
 export type VideoUncheckedCreateWithoutUserInput = {
@@ -558,6 +588,7 @@ export type VideoUncheckedCreateWithoutUserInput = {
   updatedAt?: Date | string
   reactions?: Prisma.VideoReactionUncheckedCreateNestedManyWithoutVideoInput
   reports?: Prisma.VideoReportUncheckedCreateNestedManyWithoutVideoInput
+  tags?: Prisma.VideoTagUncheckedCreateNestedManyWithoutVideoInput
 }
 
 export type VideoCreateOrConnectWithoutUserInput = {
@@ -598,6 +629,66 @@ export type VideoScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Video"> | Date | string
 }
 
+export type VideoCreateWithoutTagsInput = {
+  id?: string
+  videoUrl: string
+  caption?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutVideosInput
+  reactions?: Prisma.VideoReactionCreateNestedManyWithoutVideoInput
+  reports?: Prisma.VideoReportCreateNestedManyWithoutVideoInput
+}
+
+export type VideoUncheckedCreateWithoutTagsInput = {
+  id?: string
+  userId: string
+  videoUrl: string
+  caption?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  reactions?: Prisma.VideoReactionUncheckedCreateNestedManyWithoutVideoInput
+  reports?: Prisma.VideoReportUncheckedCreateNestedManyWithoutVideoInput
+}
+
+export type VideoCreateOrConnectWithoutTagsInput = {
+  where: Prisma.VideoWhereUniqueInput
+  create: Prisma.XOR<Prisma.VideoCreateWithoutTagsInput, Prisma.VideoUncheckedCreateWithoutTagsInput>
+}
+
+export type VideoUpsertWithoutTagsInput = {
+  update: Prisma.XOR<Prisma.VideoUpdateWithoutTagsInput, Prisma.VideoUncheckedUpdateWithoutTagsInput>
+  create: Prisma.XOR<Prisma.VideoCreateWithoutTagsInput, Prisma.VideoUncheckedCreateWithoutTagsInput>
+  where?: Prisma.VideoWhereInput
+}
+
+export type VideoUpdateToOneWithWhereWithoutTagsInput = {
+  where?: Prisma.VideoWhereInput
+  data: Prisma.XOR<Prisma.VideoUpdateWithoutTagsInput, Prisma.VideoUncheckedUpdateWithoutTagsInput>
+}
+
+export type VideoUpdateWithoutTagsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  videoUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutVideosNestedInput
+  reactions?: Prisma.VideoReactionUpdateManyWithoutVideoNestedInput
+  reports?: Prisma.VideoReportUpdateManyWithoutVideoNestedInput
+}
+
+export type VideoUncheckedUpdateWithoutTagsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  videoUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reactions?: Prisma.VideoReactionUncheckedUpdateManyWithoutVideoNestedInput
+  reports?: Prisma.VideoReportUncheckedUpdateManyWithoutVideoNestedInput
+}
+
 export type VideoCreateManyUserInput = {
   id?: string
   videoUrl: string
@@ -614,6 +705,7 @@ export type VideoUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reactions?: Prisma.VideoReactionUpdateManyWithoutVideoNestedInput
   reports?: Prisma.VideoReportUpdateManyWithoutVideoNestedInput
+  tags?: Prisma.VideoTagUpdateManyWithoutVideoNestedInput
 }
 
 export type VideoUncheckedUpdateWithoutUserInput = {
@@ -624,6 +716,7 @@ export type VideoUncheckedUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reactions?: Prisma.VideoReactionUncheckedUpdateManyWithoutVideoNestedInput
   reports?: Prisma.VideoReportUncheckedUpdateManyWithoutVideoNestedInput
+  tags?: Prisma.VideoTagUncheckedUpdateManyWithoutVideoNestedInput
 }
 
 export type VideoUncheckedUpdateManyWithoutUserInput = {
@@ -642,11 +735,13 @@ export type VideoUncheckedUpdateManyWithoutUserInput = {
 export type VideoCountOutputType = {
   reactions: number
   reports: number
+  tags: number
 }
 
 export type VideoCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   reactions?: boolean | VideoCountOutputTypeCountReactionsArgs
   reports?: boolean | VideoCountOutputTypeCountReportsArgs
+  tags?: boolean | VideoCountOutputTypeCountTagsArgs
 }
 
 /**
@@ -673,6 +768,13 @@ export type VideoCountOutputTypeCountReportsArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.VideoReportWhereInput
 }
 
+/**
+ * VideoCountOutputType without action
+ */
+export type VideoCountOutputTypeCountTagsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.VideoTagWhereInput
+}
+
 
 export type VideoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -684,6 +786,7 @@ export type VideoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   reactions?: boolean | Prisma.Video$reactionsArgs<ExtArgs>
   reports?: boolean | Prisma.Video$reportsArgs<ExtArgs>
+  tags?: boolean | Prisma.Video$tagsArgs<ExtArgs>
   _count?: boolean | Prisma.VideoCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["video"]>
 
@@ -721,6 +824,7 @@ export type VideoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   reactions?: boolean | Prisma.Video$reactionsArgs<ExtArgs>
   reports?: boolean | Prisma.Video$reportsArgs<ExtArgs>
+  tags?: boolean | Prisma.Video$tagsArgs<ExtArgs>
   _count?: boolean | Prisma.VideoCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type VideoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -736,6 +840,7 @@ export type $VideoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     user: Prisma.$UserPayload<ExtArgs>
     reactions: Prisma.$VideoReactionPayload<ExtArgs>[]
     reports: Prisma.$VideoReportPayload<ExtArgs>[]
+    tags: Prisma.$VideoTagPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1141,6 +1246,7 @@ export interface Prisma__VideoClient<T, Null = never, ExtArgs extends runtime.Ty
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   reactions<T extends Prisma.Video$reactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Video$reactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VideoReactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reports<T extends Prisma.Video$reportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Video$reportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VideoReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tags<T extends Prisma.Video$tagsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Video$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VideoTagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1622,6 +1728,30 @@ export type Video$reportsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.VideoReportScalarFieldEnum | Prisma.VideoReportScalarFieldEnum[]
+}
+
+/**
+ * Video.tags
+ */
+export type Video$tagsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the VideoTag
+   */
+  select?: Prisma.VideoTagSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the VideoTag
+   */
+  omit?: Prisma.VideoTagOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VideoTagInclude<ExtArgs> | null
+  where?: Prisma.VideoTagWhereInput
+  orderBy?: Prisma.VideoTagOrderByWithRelationInput | Prisma.VideoTagOrderByWithRelationInput[]
+  cursor?: Prisma.VideoTagWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.VideoTagScalarFieldEnum | Prisma.VideoTagScalarFieldEnum[]
 }
 
 /**

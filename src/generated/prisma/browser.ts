@@ -77,3 +77,8 @@ export type Verification = Prisma.VerificationModel
  * 
  */
 export type Video = Prisma.VideoModel
+/**
+ * Model VideoTag
+ * 
+ */
+export type VideoTag = Prisma.VideoTagModel
