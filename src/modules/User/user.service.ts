@@ -203,9 +203,9 @@ const getFriends = async (userId: string, searchTerm?: string) => {
                         isActive: true,
                         OR: searchTerm
                             ? [
-                                  { username: { contains: searchTerm, mode: "insensitive" } },
-                                  { fullName: { contains: searchTerm, mode: "insensitive" } },
-                              ]
+                                { username: { contains: searchTerm, mode: "insensitive" } },
+                                { fullName: { contains: searchTerm, mode: "insensitive" } },
+                            ]
                             : undefined,
                     },
                 },
@@ -215,9 +215,9 @@ const getFriends = async (userId: string, searchTerm?: string) => {
                         isActive: true,
                         OR: searchTerm
                             ? [
-                                  { username: { contains: searchTerm, mode: "insensitive" } },
-                                  { fullName: { contains: searchTerm, mode: "insensitive" } },
-                              ]
+                                { username: { contains: searchTerm, mode: "insensitive" } },
+                                { fullName: { contains: searchTerm, mode: "insensitive" } },
+                            ]
                             : undefined,
                     },
                 },
@@ -264,6 +264,121 @@ const getFriends = async (userId: string, searchTerm?: string) => {
     return result;
 };
 
+const getProfile = async (userId: string) => {
+    // 1. Fetch user info
+    const user = await prisma.user.findUnique({
+        where: { id: userId, isActive: true },
+        select: {
+            id: true,
+            username: true,
+            fullName: true,
+            email: true,
+            bio: true,
+            profileImage: true,
+            role: true,
+            isVerified: true,
+            createdAt: true,
+        },
+    });
+
+    if (!user) {
+        throw new AppError(httpStatus.NOT_FOUND, "User not found or inactive");
+    }
+
+    // 2. Fetch user videos with aggregation counts
+    const videosData = await prisma.video.findMany({
+        where: { userId },
+        orderBy: { createdAt: "desc" },
+        select: {
+            id: true,
+            videoUrl: true,
+            caption: true,
+            createdAt: true,
+            _count: {
+                select: {
+                    reactions: true,
+                    reports: true,
+                    tags: true,
+                },
+            },
+        },
+    });
+
+    const videos = videosData.map((v) => ({
+        id: v.id,
+        videoUrl: v.videoUrl,
+        caption: v.caption,
+        createdAt: v.createdAt,
+        reactionCount: v._count.reactions,
+        reportCount: v._count.reports,
+        taggedUsersCount: v._count.tags,
+    }));
+
+    // 3. Fetch user active stories
+    const currentDate = new Date();
+    const stories = await prisma.story.findMany({
+        where: {
+            userId,
+            expiresAt: {
+                gt: currentDate,
+            },
+        },
+        orderBy: { createdAt: "desc" },
+        select: {
+            id: true,
+            mediaUrl: true,
+            caption: true,
+            createdAt: true,
+            expiresAt: true,
+        },
+    });
+
+    // 4. Fetch accepted friends
+    const friendsData = await prisma.friend.findMany({
+        where: {
+            status: "ACCEPTED",
+            OR: [
+                { senderId: userId, receiver: { isActive: true } },
+                { receiverId: userId, sender: { isActive: true } },
+            ],
+        },
+        orderBy: { createdAt: "desc" },
+        include: {
+            sender: {
+                select: {
+                    id: true,
+                    username: true,
+                    fullName: true,
+                    profileImage: true,
+                    bio: true,
+                    isVerified: true,
+                },
+            },
+            receiver: {
+                select: {
+                    id: true,
+                    username: true,
+                    fullName: true,
+                    profileImage: true,
+                    bio: true,
+                    isVerified: true,
+                },
+            },
+        },
+    });
+
+    const friends = friendsData.map((f) => (f.senderId === userId ? f.receiver : f.sender));
+
+    return {
+        user,
+        videoCount: videos.length,
+        friendCount: friends.length,
+        videos,
+        friends,
+        stories,
+    };
+};
+
 export const userService = {
     signUpEmail,
     loginUser,
@@ -273,4 +388,5 @@ export const userService = {
     getRecentUsers,
     addFriend,
     getFriends,
+    getProfile,
 };

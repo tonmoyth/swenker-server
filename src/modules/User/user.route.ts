@@ -49,6 +49,12 @@ router.get(
     userController.getRecentUsers
 );
 
+router.get(
+    "/me",
+    checkAuth(),
+    userController.getProfile
+);
+
 router.post(
     "/add-friend",
     checkAuth(),

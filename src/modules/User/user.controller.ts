@@ -137,6 +137,18 @@ const getFriends = catchAsync(async (req: Request, res: Response) => {
     });
 });
 
+const getProfile = catchAsync(async (req: Request, res: Response) => {
+    const userId = req.user.id;
+    const result = await userService.getProfile(userId);
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Profile fetched successfully",
+        data: result,
+    });
+});
+
 export const userController = {
     registerUser,
     loginUser,
@@ -146,4 +158,5 @@ export const userController = {
     getRecentUsers,
     addFriend,
     getFriends,
+    getProfile,
 };

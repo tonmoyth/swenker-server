@@ -21,6 +21,7 @@ export const NotificationType = {
   FRIEND_ACCEPT: 'FRIEND_ACCEPT',
   VIDEO_LOVE: 'VIDEO_LOVE',
   STORY_TAG: 'STORY_TAG',
+  VIDEO_TAG: 'VIDEO_TAG',
   SUBSCRIPTION: 'SUBSCRIPTION'
 } as const
 

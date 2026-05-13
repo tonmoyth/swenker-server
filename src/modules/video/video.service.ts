@@ -41,6 +41,23 @@ const createVideoPost = async (payload: IVideoPost) => {
                     userId: id,
                 })),
             });
+
+            // Create VIDEO_TAG notifications for tagged users
+            const sender = await tx.user.findUnique({
+                where: { id: userId },
+                select: { fullName: true, username: true },
+            });
+
+            await tx.notification.createMany({
+                data: uniqueTaggedUsers.map((taggedUserId) => ({
+                    senderId: userId,
+                    receiverId: taggedUserId,
+                    title: "You were tagged in a video",
+                    body: `${sender?.fullName || sender?.username || "Someone"} tagged you in a video.`,
+                    type: "VIDEO_TAG" as const,
+                    videoId: video.id,
+                })),
+            });
         }
 
         // Return video with tags
