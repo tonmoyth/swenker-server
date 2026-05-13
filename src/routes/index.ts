@@ -1,6 +1,7 @@
 import express from "express";
 import { userRoutes } from "../modules/User/user.route";
 import { videoRoutes } from "../modules/video/video.route";
+import { notificationRoutes } from "../modules/notification/notification.route";
 
 const router = express.Router();
 
@@ -12,6 +13,10 @@ const moduleRoutes = [
     {
         path: "/videos",
         route: videoRoutes,
+    },
+    {
+        path: "/notifications",
+        route: notificationRoutes,
     },
 ];
 

@@ -159,12 +159,34 @@ const addFriend = async (senderId: string, receiverId: string) => {
         throw new AppError(httpStatus.BAD_REQUEST, "Friend request already exists or you are already friends");
     }
 
-    const result = await prisma.friend.create({
-        data: {
-            senderId,
-            receiverId,
-            status: "PENDING",
-        },
+    // Fetch sender info for notification message
+    const sender = await prisma.user.findUnique({
+        where: { id: senderId },
+        select: { username: true, fullName: true },
+    });
+
+    const result = await prisma.$transaction(async (tx) => {
+        // Create the friend request
+        const friendRequest = await tx.friend.create({
+            data: {
+                senderId,
+                receiverId,
+                status: "PENDING",
+            },
+        });
+
+        // Create a notification for the receiver
+        await tx.notification.create({
+            data: {
+                senderId,
+                receiverId,
+                title: "New Friend Request",
+                body: `${sender?.fullName || sender?.username || "Someone"} sent you a friend request.`,
+                type: "FRIEND_REQUEST",
+            },
+        });
+
+        return friendRequest;
     });
 
     return result;
