@@ -379,6 +379,53 @@ const getProfile = async (userId: string) => {
     };
 };
 
+const updateProfile = async (userId: string, payload: any) => {
+    // Remove fields that shouldn't be updated
+    const { email, role, isVerified, password, ...updateData } = payload;
+
+    // Check if user exists and is active
+    const user = await prisma.user.findUnique({
+        where: { id: userId, isActive: true },
+    });
+
+    if (!user) {
+        throw new AppError(httpStatus.NOT_FOUND, "User not found or inactive");
+    }
+
+    // Validate username uniqueness if provided
+    if (updateData.username) {
+        const existingUsername = await prisma.user.findFirst({
+            where: {
+                username: updateData.username,
+                id: { not: userId },
+            },
+        });
+
+        if (existingUsername) {
+            throw new AppError(httpStatus.CONFLICT, "Username already exists");
+        }
+    }
+
+    // Perform the update
+    const updatedUser = await prisma.user.update({
+        where: { id: userId },
+        data: updateData,
+        select: {
+            id: true,
+            username: true,
+            fullName: true,
+            email: true,
+            bio: true,
+            profileImage: true,
+            isVerified: true,
+            createdAt: true,
+            updatedAt: true,
+        },
+    });
+
+    return updatedUser;
+};
+
 export const userService = {
     signUpEmail,
     loginUser,
@@ -389,4 +436,5 @@ export const userService = {
     addFriend,
     getFriends,
     getProfile,
+    updateProfile,
 };

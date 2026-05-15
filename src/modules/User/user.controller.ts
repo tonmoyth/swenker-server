@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import "multer"; // Ensures Express.Request is augmented with .file
+import "multer";
 import { catchAsync } from "../../shared/catchAsync";
 import { userService } from "./user.service";
 import { uploadToCloudinary } from "../../middlewares/upload";
@@ -149,6 +149,26 @@ const getProfile = catchAsync(async (req: Request, res: Response) => {
     });
 });
 
+const updateProfile = catchAsync(async (req: Request, res: Response) => {
+    const userId = req.user.id;
+    const userData = req.body;
+    const file = req.file;
+
+    if (file) {
+        const imageUrl = await uploadToCloudinary(file);
+        userData.profileImage = imageUrl;
+    }
+
+    const result = await userService.updateProfile(userId, userData);
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Profile updated successfully",
+        data: result,
+    });
+});
+
 export const userController = {
     registerUser,
     loginUser,
@@ -159,4 +179,5 @@ export const userController = {
     addFriend,
     getFriends,
     getProfile,
+    updateProfile,
 };

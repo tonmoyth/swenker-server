@@ -52,3 +52,9 @@ export const addFriendSchema = z.object({
 export const getFriendsSchema = z.object({
   searchTerm: z.string().optional(),
 });
+
+export const updateProfileSchema = z.object({
+  username: z.string().min(3).max(30).optional(),
+  fullName: z.string().optional(),
+  bio: z.string().optional(),
+});

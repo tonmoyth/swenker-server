@@ -2,7 +2,7 @@ import express from "express";
 import { userController } from "./user.controller";
 import { upload } from "../../middlewares/upload";
 import validateRequest from "../../middlewares/validateRequest";
-import { userRegisterSchema, userLoginSchema, forgotPasswordSchema, resetPasswordSchema, addFriendSchema, getFriendsSchema } from "./user.validation";
+import { userRegisterSchema, userLoginSchema, forgotPasswordSchema, resetPasswordSchema, addFriendSchema, getFriendsSchema, updateProfileSchema } from "./user.validation";
 import { checkAuth } from "../../middlewares/checkAuth";
 
 const router = express.Router();
@@ -53,6 +53,20 @@ router.get(
     "/me",
     checkAuth(),
     userController.getProfile
+);
+
+router.patch(
+    "/me",
+    checkAuth(),
+    upload.single("profileImage"),
+    (req, res, next) => {
+        if (req.body.data) {
+            req.body = JSON.parse(req.body.data);
+        }
+        next();
+    },
+    validateRequest(updateProfileSchema),
+    userController.updateProfile
 );
 
 router.post(
