@@ -3,6 +3,7 @@ import { prisma } from "../../lib/prisma";
 import { IUserLogin, IUserRegistration } from "./user.interface";
 import AppError from "../../errors/AppError";
 import httpStatus from "http-status";
+import { NotificationType, ReportReason } from "../../generated/prisma/enums";
 
 const signUpEmail = async (userData: IUserRegistration) => {
     // Check if username already exists
@@ -426,6 +427,133 @@ const updateProfile = async (userId: string, payload: any) => {
     return updatedUser;
 };
 
+const createVideoReaction = async (userId: string, videoId: string) => {
+    // 1. Validate video existence and get owner info
+    const video = await prisma.video.findUnique({
+        where: { id: videoId },
+        select: { id: true, userId: true },
+    });
+
+    if (!video) {
+        throw new AppError(httpStatus.NOT_FOUND, "Video not found");
+    }
+
+    // 2. Check for existing reaction
+    const existingReaction = await prisma.videoReaction.findUnique({
+        where: {
+            userId_videoId: {
+                userId,
+                videoId,
+            },
+        },
+    });
+
+    // 3. Handle Toggle Logic
+    if (existingReaction) {
+        // If already reacted, remove the reaction
+        await prisma.videoReaction.delete({
+            where: {
+                id: existingReaction.id,
+            },
+        });
+
+        return {
+            isRemoved: true,
+            message: "Reaction removed successfully",
+        };
+    }
+
+    // 4. Create reaction and notification in a transaction
+    const result = await prisma.$transaction(async (tx) => {
+        const reaction = await tx.videoReaction.create({
+            data: {
+                userId,
+                videoId,
+            },
+        });
+
+        // Fetch sender info for notification
+        const sender = await tx.user.findUnique({
+            where: { id: userId },
+            select: { fullName: true, username: true },
+        });
+
+        // Create a notification for the video owner (only if it's not the same user)
+        if (video.userId !== userId) {
+            await tx.notification.create({
+                data: {
+                    senderId: userId,
+                    receiverId: video.userId,
+                    title: "Video Liked",
+                    body: `${sender?.fullName || sender?.username || "Someone"} liked your video.`,
+                    type: NotificationType.VIDEO_LOVE,
+                    videoId: video.id,
+                },
+            });
+        }
+
+        return reaction;
+    });
+
+    return result;
+};
+
+const createVideoReport = async (userId: string, payload: { videoId: string; reason: any }) => {
+    const { videoId, reason } = payload;
+
+    // 1. Validate video existence and get owner info
+    const video = await prisma.video.findUnique({
+        where: { id: videoId },
+        select: { id: true, userId: true },
+    });
+
+    if (!video) {
+        throw new AppError(httpStatus.NOT_FOUND, "Video not found");
+    }
+
+    // 2. Prevent duplicate/spam reports by same user
+    const existingReport = await prisma.videoReport.findFirst({
+        where: {
+            userId,
+            videoId,
+        },
+    });
+
+    if (existingReport) {
+        throw new AppError(httpStatus.CONFLICT, "You have already reported this video");
+    }
+
+    // 3. Create report and notification in a transaction
+    const result = await prisma.$transaction(async (tx) => {
+        const report = await tx.videoReport.create({
+            data: {
+                userId,
+                videoId,
+                reason,
+            },
+        });
+
+        // Create a notification for the video owner or moderation system
+        // Here we send it to the video owner as a placeholder for moderation alert
+        if (video.userId !== userId) {
+            await tx.notification.create({
+                data: {
+                    senderId: userId,
+                    receiverId: video.userId,
+                    title: "Video Reported",
+                    body: `Your video has been reported for: ${reason.replace(/_/g, ' ').toLowerCase()}.`,
+                    type: NotificationType.VIDEO_REPORT,
+                    videoId: video.id,
+                },
+            });
+        }
+
+        return report;
+    });
+
+    return result;
+};
+
 export const userService = {
     signUpEmail,
     loginUser,
@@ -437,4 +565,6 @@ export const userService = {
     getFriends,
     getProfile,
     updateProfile,
+    createVideoReaction,
+    createVideoReport,
 };

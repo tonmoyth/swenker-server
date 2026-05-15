@@ -2,7 +2,7 @@ import express from "express";
 import { videoController } from "./video.controller";
 import { checkAuth } from "../../middlewares/checkAuth";
 import validateRequest from "../../middlewares/validateRequest";
-import { createVideoSchema } from "./video.validation";
+import { createVideoSchema, getReelsQuerySchema } from "./video.validation";
 import multer from "multer";
 import AppError from "../../errors/AppError";
 import httpStatus from "http-status";
@@ -43,6 +43,12 @@ router.post(
     },
     validateRequest(createVideoSchema),
     videoController.createVideoPost
+);
+
+router.get(
+    "/reels",
+    validateRequest(getReelsQuerySchema),
+    videoController.getReelsFeed
 );
 
 export const videoRoutes = router;

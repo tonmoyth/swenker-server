@@ -169,6 +169,36 @@ const updateProfile = catchAsync(async (req: Request, res: Response) => {
     });
 });
 
+const createVideoReaction = catchAsync(async (req: Request, res: Response) => {
+    const userId = req.user.id;
+    const { videoId } = req.body;
+
+    const result = await userService.createVideoReaction(userId, videoId);
+
+    const isRemoved = (result as any)?.isRemoved;
+
+    sendResponse(res, {
+        statusCode: isRemoved ? httpStatus.OK : httpStatus.CREATED,
+        success: true,
+        message: isRemoved ? (result as any).message : "Reaction added successfully",
+        data: result,
+    });
+});
+
+const createVideoReport = catchAsync(async (req: Request, res: Response) => {
+    const userId = req.user.id;
+    const { videoId, reason } = req.body;
+
+    const result = await userService.createVideoReport(userId, { videoId, reason });
+
+    sendResponse(res, {
+        statusCode: httpStatus.CREATED,
+        success: true,
+        message: "Video reported successfully",
+        data: result,
+    });
+});
+
 export const userController = {
     registerUser,
     loginUser,
@@ -180,4 +210,6 @@ export const userController = {
     getFriends,
     getProfile,
     updateProfile,
+    createVideoReaction,
+    createVideoReport,
 };

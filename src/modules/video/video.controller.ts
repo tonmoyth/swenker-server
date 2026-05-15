@@ -51,6 +51,20 @@ const createVideoPost = catchAsync(async (req: Request, res: Response) => {
     });
 });
 
+const getReelsFeed = catchAsync(async (req: Request, res: Response) => {
+    const cursor = req.query.cursor as string | undefined;
+
+    const result = await videoService.getReelsFeed(cursor);
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Videos fetched successfully",
+        data: result,
+    });
+});
+
 export const videoController = {
     createVideoPost,
+    getReelsFeed,
 };

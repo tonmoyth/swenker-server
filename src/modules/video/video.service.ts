@@ -83,6 +83,73 @@ const createVideoPost = async (payload: IVideoPost) => {
     return result;
 };
 
+const getReelsFeed = async (cursor?: string) => {
+    const limit = 5;
+    
+    const videos = await prisma.video.findMany({
+        take: limit + 1,
+        cursor: cursor ? { id: cursor } : undefined,
+        skip: cursor ? 1 : 0,
+        orderBy: {
+            createdAt: 'desc',
+        },
+        include: {
+            user: {
+                select: {
+                    id: true,
+                    username: true,
+                    fullName: true,
+                    profileImage: true,
+                    isVerified: true,
+                },
+            },
+            tags: {
+                include: {
+                    user: {
+                        select: {
+                            id: true,
+                            username: true,
+                            fullName: true,
+                            profileImage: true,
+                        },
+                    },
+                },
+            },
+            _count: {
+                select: {
+                    reactions: true,
+                    reports: true,
+                    tags: true,
+                },
+            },
+        },
+    });
+
+    let nextCursor: string | null = null;
+    if (videos.length > limit) {
+        const nextItem = videos.pop();
+        nextCursor = nextItem?.id || null;
+    }
+
+    const formattedVideos = videos.map((video) => ({
+        id: video.id,
+        videoUrl: video.videoUrl,
+        caption: video.caption,
+        createdAt: video.createdAt,
+        user: video.user,
+        reactionsCount: video._count.reactions,
+        reportsCount: video._count.reports,
+        tagsCount: video._count.tags,
+        tags: video.tags.map((tag) => tag.user),
+    }));
+
+    return {
+        videos: formattedVideos,
+        nextCursor,
+    };
+};
+
 export const videoService = {
     createVideoPost,
+    getReelsFeed,
 };
