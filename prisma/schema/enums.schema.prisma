@@ -37,6 +37,6 @@ enum SubscriptionPlan {
   FREE
   PRO
   PREMIUM
-  PREMIUM_UPPER
+  PREMIUM_PRO
 }
 

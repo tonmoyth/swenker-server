@@ -63,7 +63,7 @@ export const SubscriptionPlan = {
   FREE: 'FREE',
   PRO: 'PRO',
   PREMIUM: 'PREMIUM',
-  PREMIUM_UPPER: 'PREMIUM_UPPER'
+  PREMIUM_PRO: 'PREMIUM_PRO'
 } as const
 
 export type SubscriptionPlan = (typeof SubscriptionPlan)[keyof typeof SubscriptionPlan]
