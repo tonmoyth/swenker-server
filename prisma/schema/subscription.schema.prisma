@@ -1,16 +1,17 @@
 model Subscription {
-  id String @id @default(uuid())
+  id               String           @id @default(uuid())
+  userId           String
+  user             User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subscriptionName String
+  plan             SubscriptionPlan @default(FREE)
+  amount           Float
+  status           PaymentStatus    @default(PENDING)
+  transactionId    String?
+  paymentMethod    String?
+  startsAt         DateTime?
+  expiresAt        DateTime?
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
 
-  subscriberId   String
-  subscribedToId String
-
-  subscriber User @relation("Subscriber", fields: [subscriberId], references: [id], onDelete: Cascade)
-
-  subscribedTo User @relation("SubscribedTo", fields: [subscribedToId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-
-  @@unique([subscriberId, subscribedToId])
-  @@index([subscriberId])
-  @@index([subscribedToId])
+  @@index([userId])
 }

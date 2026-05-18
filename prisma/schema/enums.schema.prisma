@@ -26,3 +26,17 @@ enum ReportReason {
   ILLEGAL_ACTIVITY
   OFFENSIVE_CONTENT
 }
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+enum SubscriptionPlan {
+  FREE
+  PRO
+  PREMIUM
+  PREMIUM_UPPER
+}
+

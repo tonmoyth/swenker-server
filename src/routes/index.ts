@@ -3,6 +3,7 @@ import { userRoutes } from "../modules/User/user.route";
 import { videoRoutes } from "../modules/video/video.route";
 import { notificationRoutes } from "../modules/notification/notification.route";
 import { storyRoutes } from "../modules/story/story.route";
+import { paymentRoutes } from "../modules/payment/payment.route";
 
 const router = express.Router();
 
@@ -22,6 +23,10 @@ const moduleRoutes = [
     {
         path: "/story",
         route: storyRoutes,
+    },
+    {
+        path: "/payment",
+        route: paymentRoutes,
     },
 ];
 

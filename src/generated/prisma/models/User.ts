@@ -245,7 +245,6 @@ export type UserWhereInput = {
   sentNotifications?: Prisma.NotificationListRelationFilter
   receivedNotifications?: Prisma.NotificationListRelationFilter
   subscriptions?: Prisma.SubscriptionListRelationFilter
-  subscribers?: Prisma.SubscriptionListRelationFilter
   reactions?: Prisma.VideoReactionListRelationFilter
   reports?: Prisma.VideoReportListRelationFilter
   storyTags?: Prisma.StoryTagListRelationFilter
@@ -274,7 +273,6 @@ export type UserOrderByWithRelationInput = {
   sentNotifications?: Prisma.NotificationOrderByRelationAggregateInput
   receivedNotifications?: Prisma.NotificationOrderByRelationAggregateInput
   subscriptions?: Prisma.SubscriptionOrderByRelationAggregateInput
-  subscribers?: Prisma.SubscriptionOrderByRelationAggregateInput
   reactions?: Prisma.VideoReactionOrderByRelationAggregateInput
   reports?: Prisma.VideoReportOrderByRelationAggregateInput
   storyTags?: Prisma.StoryTagOrderByRelationAggregateInput
@@ -306,7 +304,6 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   sentNotifications?: Prisma.NotificationListRelationFilter
   receivedNotifications?: Prisma.NotificationListRelationFilter
   subscriptions?: Prisma.SubscriptionListRelationFilter
-  subscribers?: Prisma.SubscriptionListRelationFilter
   reactions?: Prisma.VideoReactionListRelationFilter
   reports?: Prisma.VideoReportListRelationFilter
   storyTags?: Prisma.StoryTagListRelationFilter
@@ -370,8 +367,7 @@ export type UserCreateInput = {
   stories?: Prisma.StoryCreateNestedManyWithoutUserInput
   sentNotifications?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   receivedNotifications?: Prisma.NotificationCreateNestedManyWithoutReceiverInput
-  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutSubscriberInput
-  subscribers?: Prisma.SubscriptionCreateNestedManyWithoutSubscribedToInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   reactions?: Prisma.VideoReactionCreateNestedManyWithoutUserInput
   reports?: Prisma.VideoReportCreateNestedManyWithoutUserInput
   storyTags?: Prisma.StoryTagCreateNestedManyWithoutTaggedUserInput
@@ -399,8 +395,7 @@ export type UserUncheckedCreateInput = {
   stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
   sentNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   receivedNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutReceiverInput
-  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscriberInput
-  subscribers?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscribedToInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   reactions?: Prisma.VideoReactionUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.VideoReportUncheckedCreateNestedManyWithoutUserInput
   storyTags?: Prisma.StoryTagUncheckedCreateNestedManyWithoutTaggedUserInput
@@ -428,8 +423,7 @@ export type UserUpdateInput = {
   stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
   sentNotifications?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   receivedNotifications?: Prisma.NotificationUpdateManyWithoutReceiverNestedInput
-  subscriptions?: Prisma.SubscriptionUpdateManyWithoutSubscriberNestedInput
-  subscribers?: Prisma.SubscriptionUpdateManyWithoutSubscribedToNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   reactions?: Prisma.VideoReactionUpdateManyWithoutUserNestedInput
   reports?: Prisma.VideoReportUpdateManyWithoutUserNestedInput
   storyTags?: Prisma.StoryTagUpdateManyWithoutTaggedUserNestedInput
@@ -457,8 +451,7 @@ export type UserUncheckedUpdateInput = {
   stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
   sentNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   receivedNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
-  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscriberNestedInput
-  subscribers?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscribedToNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   reactions?: Prisma.VideoReactionUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.VideoReportUncheckedUpdateManyWithoutUserNestedInput
   storyTags?: Prisma.StoryTagUncheckedUpdateManyWithoutTaggedUserNestedInput
@@ -687,26 +680,12 @@ export type UserCreateNestedOneWithoutSubscriptionsInput = {
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserCreateNestedOneWithoutSubscribersInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutSubscribersInput, Prisma.UserUncheckedCreateWithoutSubscribersInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSubscribersInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
 export type UserUpdateOneRequiredWithoutSubscriptionsNestedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutSubscriptionsInput, Prisma.UserUncheckedCreateWithoutSubscriptionsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutSubscriptionsInput
   upsert?: Prisma.UserUpsertWithoutSubscriptionsInput
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSubscriptionsInput, Prisma.UserUpdateWithoutSubscriptionsInput>, Prisma.UserUncheckedUpdateWithoutSubscriptionsInput>
-}
-
-export type UserUpdateOneRequiredWithoutSubscribersNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutSubscribersInput, Prisma.UserUncheckedCreateWithoutSubscribersInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSubscribersInput
-  upsert?: Prisma.UserUpsertWithoutSubscribersInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSubscribersInput, Prisma.UserUpdateWithoutSubscribersInput>, Prisma.UserUncheckedUpdateWithoutSubscribersInput>
 }
 
 export type EnumUserRoleFieldUpdateOperationsInput = {
@@ -788,8 +767,7 @@ export type UserCreateWithoutSentFriendRequestsInput = {
   stories?: Prisma.StoryCreateNestedManyWithoutUserInput
   sentNotifications?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   receivedNotifications?: Prisma.NotificationCreateNestedManyWithoutReceiverInput
-  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutSubscriberInput
-  subscribers?: Prisma.SubscriptionCreateNestedManyWithoutSubscribedToInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   reactions?: Prisma.VideoReactionCreateNestedManyWithoutUserInput
   reports?: Prisma.VideoReportCreateNestedManyWithoutUserInput
   storyTags?: Prisma.StoryTagCreateNestedManyWithoutTaggedUserInput
@@ -816,8 +794,7 @@ export type UserUncheckedCreateWithoutSentFriendRequestsInput = {
   stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
   sentNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   receivedNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutReceiverInput
-  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscriberInput
-  subscribers?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscribedToInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   reactions?: Prisma.VideoReactionUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.VideoReportUncheckedCreateNestedManyWithoutUserInput
   storyTags?: Prisma.StoryTagUncheckedCreateNestedManyWithoutTaggedUserInput
@@ -849,8 +826,7 @@ export type UserCreateWithoutReceivedFriendRequestsInput = {
   stories?: Prisma.StoryCreateNestedManyWithoutUserInput
   sentNotifications?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   receivedNotifications?: Prisma.NotificationCreateNestedManyWithoutReceiverInput
-  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutSubscriberInput
-  subscribers?: Prisma.SubscriptionCreateNestedManyWithoutSubscribedToInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   reactions?: Prisma.VideoReactionCreateNestedManyWithoutUserInput
   reports?: Prisma.VideoReportCreateNestedManyWithoutUserInput
   storyTags?: Prisma.StoryTagCreateNestedManyWithoutTaggedUserInput
@@ -877,8 +853,7 @@ export type UserUncheckedCreateWithoutReceivedFriendRequestsInput = {
   stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
   sentNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   receivedNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutReceiverInput
-  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscriberInput
-  subscribers?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscribedToInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   reactions?: Prisma.VideoReactionUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.VideoReportUncheckedCreateNestedManyWithoutUserInput
   storyTags?: Prisma.StoryTagUncheckedCreateNestedManyWithoutTaggedUserInput
@@ -921,8 +896,7 @@ export type UserUpdateWithoutSentFriendRequestsInput = {
   stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
   sentNotifications?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   receivedNotifications?: Prisma.NotificationUpdateManyWithoutReceiverNestedInput
-  subscriptions?: Prisma.SubscriptionUpdateManyWithoutSubscriberNestedInput
-  subscribers?: Prisma.SubscriptionUpdateManyWithoutSubscribedToNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   reactions?: Prisma.VideoReactionUpdateManyWithoutUserNestedInput
   reports?: Prisma.VideoReportUpdateManyWithoutUserNestedInput
   storyTags?: Prisma.StoryTagUpdateManyWithoutTaggedUserNestedInput
@@ -949,8 +923,7 @@ export type UserUncheckedUpdateWithoutSentFriendRequestsInput = {
   stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
   sentNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   receivedNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
-  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscriberNestedInput
-  subscribers?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscribedToNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   reactions?: Prisma.VideoReactionUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.VideoReportUncheckedUpdateManyWithoutUserNestedInput
   storyTags?: Prisma.StoryTagUncheckedUpdateManyWithoutTaggedUserNestedInput
@@ -988,8 +961,7 @@ export type UserUpdateWithoutReceivedFriendRequestsInput = {
   stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
   sentNotifications?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   receivedNotifications?: Prisma.NotificationUpdateManyWithoutReceiverNestedInput
-  subscriptions?: Prisma.SubscriptionUpdateManyWithoutSubscriberNestedInput
-  subscribers?: Prisma.SubscriptionUpdateManyWithoutSubscribedToNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   reactions?: Prisma.VideoReactionUpdateManyWithoutUserNestedInput
   reports?: Prisma.VideoReportUpdateManyWithoutUserNestedInput
   storyTags?: Prisma.StoryTagUpdateManyWithoutTaggedUserNestedInput
@@ -1016,8 +988,7 @@ export type UserUncheckedUpdateWithoutReceivedFriendRequestsInput = {
   stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
   sentNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   receivedNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
-  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscriberNestedInput
-  subscribers?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscribedToNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   reactions?: Prisma.VideoReactionUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.VideoReportUncheckedUpdateManyWithoutUserNestedInput
   storyTags?: Prisma.StoryTagUncheckedUpdateManyWithoutTaggedUserNestedInput
@@ -1043,8 +1014,7 @@ export type UserCreateWithoutSentNotificationsInput = {
   videos?: Prisma.VideoCreateNestedManyWithoutUserInput
   stories?: Prisma.StoryCreateNestedManyWithoutUserInput
   receivedNotifications?: Prisma.NotificationCreateNestedManyWithoutReceiverInput
-  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutSubscriberInput
-  subscribers?: Prisma.SubscriptionCreateNestedManyWithoutSubscribedToInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   reactions?: Prisma.VideoReactionCreateNestedManyWithoutUserInput
   reports?: Prisma.VideoReportCreateNestedManyWithoutUserInput
   storyTags?: Prisma.StoryTagCreateNestedManyWithoutTaggedUserInput
@@ -1071,8 +1041,7 @@ export type UserUncheckedCreateWithoutSentNotificationsInput = {
   videos?: Prisma.VideoUncheckedCreateNestedManyWithoutUserInput
   stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
   receivedNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutReceiverInput
-  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscriberInput
-  subscribers?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscribedToInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   reactions?: Prisma.VideoReactionUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.VideoReportUncheckedCreateNestedManyWithoutUserInput
   storyTags?: Prisma.StoryTagUncheckedCreateNestedManyWithoutTaggedUserInput
@@ -1104,8 +1073,7 @@ export type UserCreateWithoutReceivedNotificationsInput = {
   videos?: Prisma.VideoCreateNestedManyWithoutUserInput
   stories?: Prisma.StoryCreateNestedManyWithoutUserInput
   sentNotifications?: Prisma.NotificationCreateNestedManyWithoutSenderInput
-  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutSubscriberInput
-  subscribers?: Prisma.SubscriptionCreateNestedManyWithoutSubscribedToInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   reactions?: Prisma.VideoReactionCreateNestedManyWithoutUserInput
   reports?: Prisma.VideoReportCreateNestedManyWithoutUserInput
   storyTags?: Prisma.StoryTagCreateNestedManyWithoutTaggedUserInput
@@ -1132,8 +1100,7 @@ export type UserUncheckedCreateWithoutReceivedNotificationsInput = {
   videos?: Prisma.VideoUncheckedCreateNestedManyWithoutUserInput
   stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
   sentNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
-  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscriberInput
-  subscribers?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscribedToInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   reactions?: Prisma.VideoReactionUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.VideoReportUncheckedCreateNestedManyWithoutUserInput
   storyTags?: Prisma.StoryTagUncheckedCreateNestedManyWithoutTaggedUserInput
@@ -1176,8 +1143,7 @@ export type UserUpdateWithoutSentNotificationsInput = {
   videos?: Prisma.VideoUpdateManyWithoutUserNestedInput
   stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
   receivedNotifications?: Prisma.NotificationUpdateManyWithoutReceiverNestedInput
-  subscriptions?: Prisma.SubscriptionUpdateManyWithoutSubscriberNestedInput
-  subscribers?: Prisma.SubscriptionUpdateManyWithoutSubscribedToNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   reactions?: Prisma.VideoReactionUpdateManyWithoutUserNestedInput
   reports?: Prisma.VideoReportUpdateManyWithoutUserNestedInput
   storyTags?: Prisma.StoryTagUpdateManyWithoutTaggedUserNestedInput
@@ -1204,8 +1170,7 @@ export type UserUncheckedUpdateWithoutSentNotificationsInput = {
   videos?: Prisma.VideoUncheckedUpdateManyWithoutUserNestedInput
   stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
   receivedNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
-  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscriberNestedInput
-  subscribers?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscribedToNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   reactions?: Prisma.VideoReactionUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.VideoReportUncheckedUpdateManyWithoutUserNestedInput
   storyTags?: Prisma.StoryTagUncheckedUpdateManyWithoutTaggedUserNestedInput
@@ -1243,8 +1208,7 @@ export type UserUpdateWithoutReceivedNotificationsInput = {
   videos?: Prisma.VideoUpdateManyWithoutUserNestedInput
   stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
   sentNotifications?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
-  subscriptions?: Prisma.SubscriptionUpdateManyWithoutSubscriberNestedInput
-  subscribers?: Prisma.SubscriptionUpdateManyWithoutSubscribedToNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   reactions?: Prisma.VideoReactionUpdateManyWithoutUserNestedInput
   reports?: Prisma.VideoReportUpdateManyWithoutUserNestedInput
   storyTags?: Prisma.StoryTagUpdateManyWithoutTaggedUserNestedInput
@@ -1271,8 +1235,7 @@ export type UserUncheckedUpdateWithoutReceivedNotificationsInput = {
   videos?: Prisma.VideoUncheckedUpdateManyWithoutUserNestedInput
   stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
   sentNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
-  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscriberNestedInput
-  subscribers?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscribedToNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   reactions?: Prisma.VideoReactionUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.VideoReportUncheckedUpdateManyWithoutUserNestedInput
   storyTags?: Prisma.StoryTagUncheckedUpdateManyWithoutTaggedUserNestedInput
@@ -1300,8 +1263,7 @@ export type UserCreateWithoutReactionsInput = {
   stories?: Prisma.StoryCreateNestedManyWithoutUserInput
   sentNotifications?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   receivedNotifications?: Prisma.NotificationCreateNestedManyWithoutReceiverInput
-  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutSubscriberInput
-  subscribers?: Prisma.SubscriptionCreateNestedManyWithoutSubscribedToInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   reports?: Prisma.VideoReportCreateNestedManyWithoutUserInput
   storyTags?: Prisma.StoryTagCreateNestedManyWithoutTaggedUserInput
   sentFriendRequests?: Prisma.FriendCreateNestedManyWithoutSenderInput
@@ -1328,8 +1290,7 @@ export type UserUncheckedCreateWithoutReactionsInput = {
   stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
   sentNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   receivedNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutReceiverInput
-  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscriberInput
-  subscribers?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscribedToInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.VideoReportUncheckedCreateNestedManyWithoutUserInput
   storyTags?: Prisma.StoryTagUncheckedCreateNestedManyWithoutTaggedUserInput
   sentFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutSenderInput
@@ -1372,8 +1333,7 @@ export type UserUpdateWithoutReactionsInput = {
   stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
   sentNotifications?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   receivedNotifications?: Prisma.NotificationUpdateManyWithoutReceiverNestedInput
-  subscriptions?: Prisma.SubscriptionUpdateManyWithoutSubscriberNestedInput
-  subscribers?: Prisma.SubscriptionUpdateManyWithoutSubscribedToNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   reports?: Prisma.VideoReportUpdateManyWithoutUserNestedInput
   storyTags?: Prisma.StoryTagUpdateManyWithoutTaggedUserNestedInput
   sentFriendRequests?: Prisma.FriendUpdateManyWithoutSenderNestedInput
@@ -1400,8 +1360,7 @@ export type UserUncheckedUpdateWithoutReactionsInput = {
   stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
   sentNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   receivedNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
-  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscriberNestedInput
-  subscribers?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscribedToNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.VideoReportUncheckedUpdateManyWithoutUserNestedInput
   storyTags?: Prisma.StoryTagUncheckedUpdateManyWithoutTaggedUserNestedInput
   sentFriendRequests?: Prisma.FriendUncheckedUpdateManyWithoutSenderNestedInput
@@ -1428,8 +1387,7 @@ export type UserCreateWithoutReportsInput = {
   stories?: Prisma.StoryCreateNestedManyWithoutUserInput
   sentNotifications?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   receivedNotifications?: Prisma.NotificationCreateNestedManyWithoutReceiverInput
-  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutSubscriberInput
-  subscribers?: Prisma.SubscriptionCreateNestedManyWithoutSubscribedToInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   reactions?: Prisma.VideoReactionCreateNestedManyWithoutUserInput
   storyTags?: Prisma.StoryTagCreateNestedManyWithoutTaggedUserInput
   sentFriendRequests?: Prisma.FriendCreateNestedManyWithoutSenderInput
@@ -1456,8 +1414,7 @@ export type UserUncheckedCreateWithoutReportsInput = {
   stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
   sentNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   receivedNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutReceiverInput
-  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscriberInput
-  subscribers?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscribedToInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   reactions?: Prisma.VideoReactionUncheckedCreateNestedManyWithoutUserInput
   storyTags?: Prisma.StoryTagUncheckedCreateNestedManyWithoutTaggedUserInput
   sentFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutSenderInput
@@ -1500,8 +1457,7 @@ export type UserUpdateWithoutReportsInput = {
   stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
   sentNotifications?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   receivedNotifications?: Prisma.NotificationUpdateManyWithoutReceiverNestedInput
-  subscriptions?: Prisma.SubscriptionUpdateManyWithoutSubscriberNestedInput
-  subscribers?: Prisma.SubscriptionUpdateManyWithoutSubscribedToNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   reactions?: Prisma.VideoReactionUpdateManyWithoutUserNestedInput
   storyTags?: Prisma.StoryTagUpdateManyWithoutTaggedUserNestedInput
   sentFriendRequests?: Prisma.FriendUpdateManyWithoutSenderNestedInput
@@ -1528,8 +1484,7 @@ export type UserUncheckedUpdateWithoutReportsInput = {
   stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
   sentNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   receivedNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
-  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscriberNestedInput
-  subscribers?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscribedToNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   reactions?: Prisma.VideoReactionUncheckedUpdateManyWithoutUserNestedInput
   storyTags?: Prisma.StoryTagUncheckedUpdateManyWithoutTaggedUserNestedInput
   sentFriendRequests?: Prisma.FriendUncheckedUpdateManyWithoutSenderNestedInput
@@ -1555,8 +1510,7 @@ export type UserCreateWithoutStoriesInput = {
   videos?: Prisma.VideoCreateNestedManyWithoutUserInput
   sentNotifications?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   receivedNotifications?: Prisma.NotificationCreateNestedManyWithoutReceiverInput
-  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutSubscriberInput
-  subscribers?: Prisma.SubscriptionCreateNestedManyWithoutSubscribedToInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   reactions?: Prisma.VideoReactionCreateNestedManyWithoutUserInput
   reports?: Prisma.VideoReportCreateNestedManyWithoutUserInput
   storyTags?: Prisma.StoryTagCreateNestedManyWithoutTaggedUserInput
@@ -1583,8 +1537,7 @@ export type UserUncheckedCreateWithoutStoriesInput = {
   videos?: Prisma.VideoUncheckedCreateNestedManyWithoutUserInput
   sentNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   receivedNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutReceiverInput
-  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscriberInput
-  subscribers?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscribedToInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   reactions?: Prisma.VideoReactionUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.VideoReportUncheckedCreateNestedManyWithoutUserInput
   storyTags?: Prisma.StoryTagUncheckedCreateNestedManyWithoutTaggedUserInput
@@ -1627,8 +1580,7 @@ export type UserUpdateWithoutStoriesInput = {
   videos?: Prisma.VideoUpdateManyWithoutUserNestedInput
   sentNotifications?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   receivedNotifications?: Prisma.NotificationUpdateManyWithoutReceiverNestedInput
-  subscriptions?: Prisma.SubscriptionUpdateManyWithoutSubscriberNestedInput
-  subscribers?: Prisma.SubscriptionUpdateManyWithoutSubscribedToNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   reactions?: Prisma.VideoReactionUpdateManyWithoutUserNestedInput
   reports?: Prisma.VideoReportUpdateManyWithoutUserNestedInput
   storyTags?: Prisma.StoryTagUpdateManyWithoutTaggedUserNestedInput
@@ -1655,8 +1607,7 @@ export type UserUncheckedUpdateWithoutStoriesInput = {
   videos?: Prisma.VideoUncheckedUpdateManyWithoutUserNestedInput
   sentNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   receivedNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
-  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscriberNestedInput
-  subscribers?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscribedToNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   reactions?: Prisma.VideoReactionUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.VideoReportUncheckedUpdateManyWithoutUserNestedInput
   storyTags?: Prisma.StoryTagUncheckedUpdateManyWithoutTaggedUserNestedInput
@@ -1684,8 +1635,7 @@ export type UserCreateWithoutStoryTagsInput = {
   stories?: Prisma.StoryCreateNestedManyWithoutUserInput
   sentNotifications?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   receivedNotifications?: Prisma.NotificationCreateNestedManyWithoutReceiverInput
-  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutSubscriberInput
-  subscribers?: Prisma.SubscriptionCreateNestedManyWithoutSubscribedToInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   reactions?: Prisma.VideoReactionCreateNestedManyWithoutUserInput
   reports?: Prisma.VideoReportCreateNestedManyWithoutUserInput
   sentFriendRequests?: Prisma.FriendCreateNestedManyWithoutSenderInput
@@ -1712,8 +1662,7 @@ export type UserUncheckedCreateWithoutStoryTagsInput = {
   stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
   sentNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   receivedNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutReceiverInput
-  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscriberInput
-  subscribers?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscribedToInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   reactions?: Prisma.VideoReactionUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.VideoReportUncheckedCreateNestedManyWithoutUserInput
   sentFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutSenderInput
@@ -1756,8 +1705,7 @@ export type UserUpdateWithoutStoryTagsInput = {
   stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
   sentNotifications?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   receivedNotifications?: Prisma.NotificationUpdateManyWithoutReceiverNestedInput
-  subscriptions?: Prisma.SubscriptionUpdateManyWithoutSubscriberNestedInput
-  subscribers?: Prisma.SubscriptionUpdateManyWithoutSubscribedToNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   reactions?: Prisma.VideoReactionUpdateManyWithoutUserNestedInput
   reports?: Prisma.VideoReportUpdateManyWithoutUserNestedInput
   sentFriendRequests?: Prisma.FriendUpdateManyWithoutSenderNestedInput
@@ -1784,8 +1732,7 @@ export type UserUncheckedUpdateWithoutStoryTagsInput = {
   stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
   sentNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   receivedNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
-  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscriberNestedInput
-  subscribers?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscribedToNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   reactions?: Prisma.VideoReactionUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.VideoReportUncheckedUpdateManyWithoutUserNestedInput
   sentFriendRequests?: Prisma.FriendUncheckedUpdateManyWithoutSenderNestedInput
@@ -1812,7 +1759,6 @@ export type UserCreateWithoutSubscriptionsInput = {
   stories?: Prisma.StoryCreateNestedManyWithoutUserInput
   sentNotifications?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   receivedNotifications?: Prisma.NotificationCreateNestedManyWithoutReceiverInput
-  subscribers?: Prisma.SubscriptionCreateNestedManyWithoutSubscribedToInput
   reactions?: Prisma.VideoReactionCreateNestedManyWithoutUserInput
   reports?: Prisma.VideoReportCreateNestedManyWithoutUserInput
   storyTags?: Prisma.StoryTagCreateNestedManyWithoutTaggedUserInput
@@ -1840,7 +1786,6 @@ export type UserUncheckedCreateWithoutSubscriptionsInput = {
   stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
   sentNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   receivedNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutReceiverInput
-  subscribers?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscribedToInput
   reactions?: Prisma.VideoReactionUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.VideoReportUncheckedCreateNestedManyWithoutUserInput
   storyTags?: Prisma.StoryTagUncheckedCreateNestedManyWithoutTaggedUserInput
@@ -1852,67 +1797,6 @@ export type UserUncheckedCreateWithoutSubscriptionsInput = {
 export type UserCreateOrConnectWithoutSubscriptionsInput = {
   where: Prisma.UserWhereUniqueInput
   create: Prisma.XOR<Prisma.UserCreateWithoutSubscriptionsInput, Prisma.UserUncheckedCreateWithoutSubscriptionsInput>
-}
-
-export type UserCreateWithoutSubscribersInput = {
-  id?: string
-  username: string
-  fullName: string
-  email: string
-  emailVerified?: boolean
-  bio?: string | null
-  profileImage?: string | null
-  role?: $Enums.UserRole
-  isActive?: boolean
-  isVerified?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  videos?: Prisma.VideoCreateNestedManyWithoutUserInput
-  stories?: Prisma.StoryCreateNestedManyWithoutUserInput
-  sentNotifications?: Prisma.NotificationCreateNestedManyWithoutSenderInput
-  receivedNotifications?: Prisma.NotificationCreateNestedManyWithoutReceiverInput
-  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutSubscriberInput
-  reactions?: Prisma.VideoReactionCreateNestedManyWithoutUserInput
-  reports?: Prisma.VideoReportCreateNestedManyWithoutUserInput
-  storyTags?: Prisma.StoryTagCreateNestedManyWithoutTaggedUserInput
-  sentFriendRequests?: Prisma.FriendCreateNestedManyWithoutSenderInput
-  receivedFriendRequests?: Prisma.FriendCreateNestedManyWithoutReceiverInput
-  videoTags?: Prisma.VideoTagCreateNestedManyWithoutUserInput
-}
-
-export type UserUncheckedCreateWithoutSubscribersInput = {
-  id?: string
-  username: string
-  fullName: string
-  email: string
-  emailVerified?: boolean
-  bio?: string | null
-  profileImage?: string | null
-  role?: $Enums.UserRole
-  isActive?: boolean
-  isVerified?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  videos?: Prisma.VideoUncheckedCreateNestedManyWithoutUserInput
-  stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
-  sentNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
-  receivedNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutReceiverInput
-  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscriberInput
-  reactions?: Prisma.VideoReactionUncheckedCreateNestedManyWithoutUserInput
-  reports?: Prisma.VideoReportUncheckedCreateNestedManyWithoutUserInput
-  storyTags?: Prisma.StoryTagUncheckedCreateNestedManyWithoutTaggedUserInput
-  sentFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutSenderInput
-  receivedFriendRequests?: Prisma.FriendUncheckedCreateNestedManyWithoutReceiverInput
-  videoTags?: Prisma.VideoTagUncheckedCreateNestedManyWithoutUserInput
-}
-
-export type UserCreateOrConnectWithoutSubscribersInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutSubscribersInput, Prisma.UserUncheckedCreateWithoutSubscribersInput>
 }
 
 export type UserUpsertWithoutSubscriptionsInput = {
@@ -1945,7 +1829,6 @@ export type UserUpdateWithoutSubscriptionsInput = {
   stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
   sentNotifications?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   receivedNotifications?: Prisma.NotificationUpdateManyWithoutReceiverNestedInput
-  subscribers?: Prisma.SubscriptionUpdateManyWithoutSubscribedToNestedInput
   reactions?: Prisma.VideoReactionUpdateManyWithoutUserNestedInput
   reports?: Prisma.VideoReportUpdateManyWithoutUserNestedInput
   storyTags?: Prisma.StoryTagUpdateManyWithoutTaggedUserNestedInput
@@ -1973,74 +1856,6 @@ export type UserUncheckedUpdateWithoutSubscriptionsInput = {
   stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
   sentNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   receivedNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
-  subscribers?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscribedToNestedInput
-  reactions?: Prisma.VideoReactionUncheckedUpdateManyWithoutUserNestedInput
-  reports?: Prisma.VideoReportUncheckedUpdateManyWithoutUserNestedInput
-  storyTags?: Prisma.StoryTagUncheckedUpdateManyWithoutTaggedUserNestedInput
-  sentFriendRequests?: Prisma.FriendUncheckedUpdateManyWithoutSenderNestedInput
-  receivedFriendRequests?: Prisma.FriendUncheckedUpdateManyWithoutReceiverNestedInput
-  videoTags?: Prisma.VideoTagUncheckedUpdateManyWithoutUserNestedInput
-}
-
-export type UserUpsertWithoutSubscribersInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutSubscribersInput, Prisma.UserUncheckedUpdateWithoutSubscribersInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutSubscribersInput, Prisma.UserUncheckedCreateWithoutSubscribersInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutSubscribersInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutSubscribersInput, Prisma.UserUncheckedUpdateWithoutSubscribersInput>
-}
-
-export type UserUpdateWithoutSubscribersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  videos?: Prisma.VideoUpdateManyWithoutUserNestedInput
-  stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
-  sentNotifications?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
-  receivedNotifications?: Prisma.NotificationUpdateManyWithoutReceiverNestedInput
-  subscriptions?: Prisma.SubscriptionUpdateManyWithoutSubscriberNestedInput
-  reactions?: Prisma.VideoReactionUpdateManyWithoutUserNestedInput
-  reports?: Prisma.VideoReportUpdateManyWithoutUserNestedInput
-  storyTags?: Prisma.StoryTagUpdateManyWithoutTaggedUserNestedInput
-  sentFriendRequests?: Prisma.FriendUpdateManyWithoutSenderNestedInput
-  receivedFriendRequests?: Prisma.FriendUpdateManyWithoutReceiverNestedInput
-  videoTags?: Prisma.VideoTagUpdateManyWithoutUserNestedInput
-}
-
-export type UserUncheckedUpdateWithoutSubscribersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  videos?: Prisma.VideoUncheckedUpdateManyWithoutUserNestedInput
-  stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
-  sentNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
-  receivedNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
-  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscriberNestedInput
   reactions?: Prisma.VideoReactionUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.VideoReportUncheckedUpdateManyWithoutUserNestedInput
   storyTags?: Prisma.StoryTagUncheckedUpdateManyWithoutTaggedUserNestedInput
@@ -2067,8 +1882,7 @@ export type UserCreateWithoutSessionsInput = {
   stories?: Prisma.StoryCreateNestedManyWithoutUserInput
   sentNotifications?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   receivedNotifications?: Prisma.NotificationCreateNestedManyWithoutReceiverInput
-  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutSubscriberInput
-  subscribers?: Prisma.SubscriptionCreateNestedManyWithoutSubscribedToInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   reactions?: Prisma.VideoReactionCreateNestedManyWithoutUserInput
   reports?: Prisma.VideoReportCreateNestedManyWithoutUserInput
   storyTags?: Prisma.StoryTagCreateNestedManyWithoutTaggedUserInput
@@ -2095,8 +1909,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
   sentNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   receivedNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutReceiverInput
-  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscriberInput
-  subscribers?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscribedToInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   reactions?: Prisma.VideoReactionUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.VideoReportUncheckedCreateNestedManyWithoutUserInput
   storyTags?: Prisma.StoryTagUncheckedCreateNestedManyWithoutTaggedUserInput
@@ -2139,8 +1952,7 @@ export type UserUpdateWithoutSessionsInput = {
   stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
   sentNotifications?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   receivedNotifications?: Prisma.NotificationUpdateManyWithoutReceiverNestedInput
-  subscriptions?: Prisma.SubscriptionUpdateManyWithoutSubscriberNestedInput
-  subscribers?: Prisma.SubscriptionUpdateManyWithoutSubscribedToNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   reactions?: Prisma.VideoReactionUpdateManyWithoutUserNestedInput
   reports?: Prisma.VideoReportUpdateManyWithoutUserNestedInput
   storyTags?: Prisma.StoryTagUpdateManyWithoutTaggedUserNestedInput
@@ -2167,8 +1979,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
   sentNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   receivedNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
-  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscriberNestedInput
-  subscribers?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscribedToNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   reactions?: Prisma.VideoReactionUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.VideoReportUncheckedUpdateManyWithoutUserNestedInput
   storyTags?: Prisma.StoryTagUncheckedUpdateManyWithoutTaggedUserNestedInput
@@ -2195,8 +2006,7 @@ export type UserCreateWithoutAccountsInput = {
   stories?: Prisma.StoryCreateNestedManyWithoutUserInput
   sentNotifications?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   receivedNotifications?: Prisma.NotificationCreateNestedManyWithoutReceiverInput
-  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutSubscriberInput
-  subscribers?: Prisma.SubscriptionCreateNestedManyWithoutSubscribedToInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   reactions?: Prisma.VideoReactionCreateNestedManyWithoutUserInput
   reports?: Prisma.VideoReportCreateNestedManyWithoutUserInput
   storyTags?: Prisma.StoryTagCreateNestedManyWithoutTaggedUserInput
@@ -2223,8 +2033,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
   sentNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   receivedNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutReceiverInput
-  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscriberInput
-  subscribers?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscribedToInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   reactions?: Prisma.VideoReactionUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.VideoReportUncheckedCreateNestedManyWithoutUserInput
   storyTags?: Prisma.StoryTagUncheckedCreateNestedManyWithoutTaggedUserInput
@@ -2267,8 +2076,7 @@ export type UserUpdateWithoutAccountsInput = {
   stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
   sentNotifications?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   receivedNotifications?: Prisma.NotificationUpdateManyWithoutReceiverNestedInput
-  subscriptions?: Prisma.SubscriptionUpdateManyWithoutSubscriberNestedInput
-  subscribers?: Prisma.SubscriptionUpdateManyWithoutSubscribedToNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   reactions?: Prisma.VideoReactionUpdateManyWithoutUserNestedInput
   reports?: Prisma.VideoReportUpdateManyWithoutUserNestedInput
   storyTags?: Prisma.StoryTagUpdateManyWithoutTaggedUserNestedInput
@@ -2295,8 +2103,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
   sentNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   receivedNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
-  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscriberNestedInput
-  subscribers?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscribedToNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   reactions?: Prisma.VideoReactionUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.VideoReportUncheckedUpdateManyWithoutUserNestedInput
   storyTags?: Prisma.StoryTagUncheckedUpdateManyWithoutTaggedUserNestedInput
@@ -2323,8 +2130,7 @@ export type UserCreateWithoutVideosInput = {
   stories?: Prisma.StoryCreateNestedManyWithoutUserInput
   sentNotifications?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   receivedNotifications?: Prisma.NotificationCreateNestedManyWithoutReceiverInput
-  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutSubscriberInput
-  subscribers?: Prisma.SubscriptionCreateNestedManyWithoutSubscribedToInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   reactions?: Prisma.VideoReactionCreateNestedManyWithoutUserInput
   reports?: Prisma.VideoReportCreateNestedManyWithoutUserInput
   storyTags?: Prisma.StoryTagCreateNestedManyWithoutTaggedUserInput
@@ -2351,8 +2157,7 @@ export type UserUncheckedCreateWithoutVideosInput = {
   stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
   sentNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   receivedNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutReceiverInput
-  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscriberInput
-  subscribers?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscribedToInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   reactions?: Prisma.VideoReactionUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.VideoReportUncheckedCreateNestedManyWithoutUserInput
   storyTags?: Prisma.StoryTagUncheckedCreateNestedManyWithoutTaggedUserInput
@@ -2395,8 +2200,7 @@ export type UserUpdateWithoutVideosInput = {
   stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
   sentNotifications?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   receivedNotifications?: Prisma.NotificationUpdateManyWithoutReceiverNestedInput
-  subscriptions?: Prisma.SubscriptionUpdateManyWithoutSubscriberNestedInput
-  subscribers?: Prisma.SubscriptionUpdateManyWithoutSubscribedToNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   reactions?: Prisma.VideoReactionUpdateManyWithoutUserNestedInput
   reports?: Prisma.VideoReportUpdateManyWithoutUserNestedInput
   storyTags?: Prisma.StoryTagUpdateManyWithoutTaggedUserNestedInput
@@ -2423,8 +2227,7 @@ export type UserUncheckedUpdateWithoutVideosInput = {
   stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
   sentNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   receivedNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
-  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscriberNestedInput
-  subscribers?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscribedToNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   reactions?: Prisma.VideoReactionUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.VideoReportUncheckedUpdateManyWithoutUserNestedInput
   storyTags?: Prisma.StoryTagUncheckedUpdateManyWithoutTaggedUserNestedInput
@@ -2452,8 +2255,7 @@ export type UserCreateWithoutVideoTagsInput = {
   stories?: Prisma.StoryCreateNestedManyWithoutUserInput
   sentNotifications?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   receivedNotifications?: Prisma.NotificationCreateNestedManyWithoutReceiverInput
-  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutSubscriberInput
-  subscribers?: Prisma.SubscriptionCreateNestedManyWithoutSubscribedToInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   reactions?: Prisma.VideoReactionCreateNestedManyWithoutUserInput
   reports?: Prisma.VideoReportCreateNestedManyWithoutUserInput
   storyTags?: Prisma.StoryTagCreateNestedManyWithoutTaggedUserInput
@@ -2480,8 +2282,7 @@ export type UserUncheckedCreateWithoutVideoTagsInput = {
   stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
   sentNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   receivedNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutReceiverInput
-  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscriberInput
-  subscribers?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutSubscribedToInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   reactions?: Prisma.VideoReactionUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.VideoReportUncheckedCreateNestedManyWithoutUserInput
   storyTags?: Prisma.StoryTagUncheckedCreateNestedManyWithoutTaggedUserInput
@@ -2524,8 +2325,7 @@ export type UserUpdateWithoutVideoTagsInput = {
   stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
   sentNotifications?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   receivedNotifications?: Prisma.NotificationUpdateManyWithoutReceiverNestedInput
-  subscriptions?: Prisma.SubscriptionUpdateManyWithoutSubscriberNestedInput
-  subscribers?: Prisma.SubscriptionUpdateManyWithoutSubscribedToNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   reactions?: Prisma.VideoReactionUpdateManyWithoutUserNestedInput
   reports?: Prisma.VideoReportUpdateManyWithoutUserNestedInput
   storyTags?: Prisma.StoryTagUpdateManyWithoutTaggedUserNestedInput
@@ -2552,8 +2352,7 @@ export type UserUncheckedUpdateWithoutVideoTagsInput = {
   stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
   sentNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   receivedNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutReceiverNestedInput
-  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscriberNestedInput
-  subscribers?: Prisma.SubscriptionUncheckedUpdateManyWithoutSubscribedToNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   reactions?: Prisma.VideoReactionUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.VideoReportUncheckedUpdateManyWithoutUserNestedInput
   storyTags?: Prisma.StoryTagUncheckedUpdateManyWithoutTaggedUserNestedInput
@@ -2574,7 +2373,6 @@ export type UserCountOutputType = {
   sentNotifications: number
   receivedNotifications: number
   subscriptions: number
-  subscribers: number
   reactions: number
   reports: number
   storyTags: number
@@ -2591,7 +2389,6 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   sentNotifications?: boolean | UserCountOutputTypeCountSentNotificationsArgs
   receivedNotifications?: boolean | UserCountOutputTypeCountReceivedNotificationsArgs
   subscriptions?: boolean | UserCountOutputTypeCountSubscriptionsArgs
-  subscribers?: boolean | UserCountOutputTypeCountSubscribersArgs
   reactions?: boolean | UserCountOutputTypeCountReactionsArgs
   reports?: boolean | UserCountOutputTypeCountReportsArgs
   storyTags?: boolean | UserCountOutputTypeCountStoryTagsArgs
@@ -2662,13 +2459,6 @@ export type UserCountOutputTypeCountSubscriptionsArgs<ExtArgs extends runtime.Ty
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountSubscribersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.SubscriptionWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
 export type UserCountOutputTypeCountReactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.VideoReactionWhereInput
 }
@@ -2729,7 +2519,6 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   sentNotifications?: boolean | Prisma.User$sentNotificationsArgs<ExtArgs>
   receivedNotifications?: boolean | Prisma.User$receivedNotificationsArgs<ExtArgs>
   subscriptions?: boolean | Prisma.User$subscriptionsArgs<ExtArgs>
-  subscribers?: boolean | Prisma.User$subscribersArgs<ExtArgs>
   reactions?: boolean | Prisma.User$reactionsArgs<ExtArgs>
   reports?: boolean | Prisma.User$reportsArgs<ExtArgs>
   storyTags?: boolean | Prisma.User$storyTagsArgs<ExtArgs>
@@ -2793,7 +2582,6 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   sentNotifications?: boolean | Prisma.User$sentNotificationsArgs<ExtArgs>
   receivedNotifications?: boolean | Prisma.User$receivedNotificationsArgs<ExtArgs>
   subscriptions?: boolean | Prisma.User$subscriptionsArgs<ExtArgs>
-  subscribers?: boolean | Prisma.User$subscribersArgs<ExtArgs>
   reactions?: boolean | Prisma.User$reactionsArgs<ExtArgs>
   reports?: boolean | Prisma.User$reportsArgs<ExtArgs>
   storyTags?: boolean | Prisma.User$storyTagsArgs<ExtArgs>
@@ -2815,7 +2603,6 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     sentNotifications: Prisma.$NotificationPayload<ExtArgs>[]
     receivedNotifications: Prisma.$NotificationPayload<ExtArgs>[]
     subscriptions: Prisma.$SubscriptionPayload<ExtArgs>[]
-    subscribers: Prisma.$SubscriptionPayload<ExtArgs>[]
     reactions: Prisma.$VideoReactionPayload<ExtArgs>[]
     reports: Prisma.$VideoReportPayload<ExtArgs>[]
     storyTags: Prisma.$StoryTagPayload<ExtArgs>[]
@@ -3237,7 +3024,6 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   sentNotifications<T extends Prisma.User$sentNotificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sentNotificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   receivedNotifications<T extends Prisma.User$receivedNotificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$receivedNotificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   subscriptions<T extends Prisma.User$subscriptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$subscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  subscribers<T extends Prisma.User$subscribersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$subscribersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reactions<T extends Prisma.User$reactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VideoReactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reports<T extends Prisma.User$reportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VideoReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   storyTags<T extends Prisma.User$storyTagsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$storyTagsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StoryTagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -3825,30 +3611,6 @@ export type User$receivedNotificationsArgs<ExtArgs extends runtime.Types.Extensi
  * User.subscriptions
  */
 export type User$subscriptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Subscription
-   */
-  select?: Prisma.SubscriptionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Subscription
-   */
-  omit?: Prisma.SubscriptionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.SubscriptionInclude<ExtArgs> | null
-  where?: Prisma.SubscriptionWhereInput
-  orderBy?: Prisma.SubscriptionOrderByWithRelationInput | Prisma.SubscriptionOrderByWithRelationInput[]
-  cursor?: Prisma.SubscriptionWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.SubscriptionScalarFieldEnum | Prisma.SubscriptionScalarFieldEnum[]
-}
-
-/**
- * User.subscribers
- */
-export type User$subscribersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Subscription
    */

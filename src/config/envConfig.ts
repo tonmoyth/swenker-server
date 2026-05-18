@@ -18,6 +18,9 @@ interface IEnvReturnType {
     EMAIL_USER: string;
     EMAIL_PASS: string;
     EMAIL_FROM: string;
+    STRIPE_SECRET_KEY: string;
+    STRIPE_WEBHOOK_SECRET: string;
+    FRONTEND_URL: string;
 }
 
 const envConfig = (): IEnvReturnType => {
@@ -36,6 +39,9 @@ const envConfig = (): IEnvReturnType => {
         "EMAIL_USER",
         "EMAIL_PASS",
         "EMAIL_FROM",
+        "STRIPE_SECRET_KEY",
+        "STRIPE_WEBHOOK_SECRET",
+        "FRONTEND_URL",
     ];
     envName.forEach((element) => {
         if (!process.env[element]) {
@@ -58,6 +64,9 @@ const envConfig = (): IEnvReturnType => {
         EMAIL_USER: process.env.EMAIL_USER!,
         EMAIL_PASS: process.env.EMAIL_PASS!,
         EMAIL_FROM: process.env.EMAIL_FROM!,
+        STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY!,
+        STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET!,
+        FRONTEND_URL: process.env.FRONTEND_URL!,
     };
 };
 

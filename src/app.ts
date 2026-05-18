@@ -5,13 +5,22 @@ import { toNodeHandler } from "better-auth/node";
 import cookieParser from 'cookie-parser';
 
 import router from './routes';
+import { paymentController } from './modules/payment/payment.controller';
 
 const app: Application = express();
 
 app.all("/api/auth/*splat", toNodeHandler(auth));
 
 // parsers
+app.post(
+  "/webhook",
+  express.raw({ type: "application/json" }),
+  paymentController.handlerStripeWebhookEvent,
+);
+
 app.use(express.json());
+
+
 app.use(cors());
 app.use(cookieParser());
 

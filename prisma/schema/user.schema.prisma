@@ -20,8 +20,8 @@ model User {
     stories                Story[]
     sentNotifications      Notification[]  @relation("SenderNotifications")
     receivedNotifications  Notification[]  @relation("ReceiverNotifications")
-    subscriptions          Subscription[]  @relation("Subscriber")
-    subscribers            Subscription[]  @relation("SubscribedTo")
+    subscriptions          Subscription[]
+
     reactions              VideoReaction[]
     reports                VideoReport[]
     storyTags              StoryTag[]

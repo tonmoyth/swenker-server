@@ -154,9 +154,17 @@ export type StoryTagScalarFieldEnum = (typeof StoryTagScalarFieldEnum)[keyof typ
 
 export const SubscriptionScalarFieldEnum = {
   id: 'id',
-  subscriberId: 'subscriberId',
-  subscribedToId: 'subscribedToId',
-  createdAt: 'createdAt'
+  userId: 'userId',
+  subscriptionName: 'subscriptionName',
+  plan: 'plan',
+  amount: 'amount',
+  status: 'status',
+  transactionId: 'transactionId',
+  paymentMethod: 'paymentMethod',
+  startsAt: 'startsAt',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type SubscriptionScalarFieldEnum = (typeof SubscriptionScalarFieldEnum)[keyof typeof SubscriptionScalarFieldEnum]
